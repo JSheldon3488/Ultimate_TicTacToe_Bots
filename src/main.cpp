@@ -13,6 +13,11 @@ int main()
 
     //Create everything needed to run the application
     //Create RenderObject
+    Renderer renderer(ScreenWdith,ScreenHeight, TileWdith, TileHeight);
+    //Create Test board and call Render
+    while (true) {
+        renderer.Render(std::vector<std::string> {"x", "o", "", "", "", "", "", "", ""});
+    }
     //Create Controller
     //Create Game
     //Run Game

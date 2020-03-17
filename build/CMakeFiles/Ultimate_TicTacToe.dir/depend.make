@@ -6,5 +6,7 @@ CMakeFiles/Ultimate_TicTacToe.dir/src/main.cpp.o: ../src/game.h
 CMakeFiles/Ultimate_TicTacToe.dir/src/main.cpp.o: ../src/main.cpp
 CMakeFiles/Ultimate_TicTacToe.dir/src/main.cpp.o: ../src/renderer.h
 
+CMakeFiles/Ultimate_TicTacToe.dir/src/renderer.cpp.o: ../src/game.h
 CMakeFiles/Ultimate_TicTacToe.dir/src/renderer.cpp.o: ../src/renderer.cpp
+CMakeFiles/Ultimate_TicTacToe.dir/src/renderer.cpp.o: ../src/renderer.h
 

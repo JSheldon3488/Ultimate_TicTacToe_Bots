@@ -21,4 +21,12 @@ renderer.h
 /home/workspace/FinalProject/src/renderer.h
 
 /home/workspace/FinalProject/src/renderer.h
+SDL2/SDL.h
+-
+vector
+-
+string
+-
+game.h
+/home/workspace/FinalProject/src/game.h
 
