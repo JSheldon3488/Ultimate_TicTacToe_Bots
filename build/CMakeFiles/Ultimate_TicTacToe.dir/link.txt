@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/Ultimate_TicTacToe.dir/src/main.cpp.o CMakeFiles/Ultimate_TicTacToe.dir/src/renderer.cpp.o  -o Ultimate_TicTacToe -L/usr/lib/x86_64-linux-gnu  -lSDL2 
