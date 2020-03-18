@@ -12,13 +12,15 @@ enum State {
 
 class Tile {
 public:
-    Tile();
+    Tile(const int row, const int col);
     bool setState(State state);
     State getState();
+    const int row;
+    const int col;
+    bool isOccupied;
 
 private:
     State currentState;
-    bool isOccupied;
 };
 
 

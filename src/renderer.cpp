@@ -32,11 +32,22 @@ Renderer::~Renderer() {
 }
 
 void Renderer::Render(Board board) {
+    //Rectangle used for rendering the tiles
+    SDL_Rect rect;
+    rect.w = tile_width;
+    rect.h = tile_height;
+
     //Clear Screen
     SDL_SetRenderDrawColor(_renderer, 255,255,255,0xFF);
     SDL_RenderClear(_renderer);
 
     //Draw Grid
+    for (Tile tile : board.grid) {
+        SDL_SetRenderDrawColor(_renderer, 0,0,0,0xFF);
+        rect.x = tile.row * rect.w;
+        rect.y = tile.col * rect.h;
+        SDL_RenderDrawRect(_renderer, &rect);
+    }
 
     //Draw X's and O's
 
