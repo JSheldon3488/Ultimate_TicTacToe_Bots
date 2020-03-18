@@ -31,7 +31,7 @@ Renderer::~Renderer() {
     SDL_Quit();
 }
 
-void Renderer::Render(std::vector<std::string> board) {
+void Renderer::Render(Board board) {
     //Clear Screen
     SDL_SetRenderDrawColor(_renderer, 255,255,255,0xFF);
     SDL_RenderClear(_renderer);

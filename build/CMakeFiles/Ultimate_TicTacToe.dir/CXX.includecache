@@ -6,27 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/workspace/FinalProject/src/controller.h
+/home/workspace/FinalProject/src/board.cpp
+board.h
+/home/workspace/FinalProject/src/board.h
 
-/home/workspace/FinalProject/src/game.h
-
-/home/workspace/FinalProject/src/main.cpp
-iostream
--
-controller.h
-/home/workspace/FinalProject/src/controller.h
-game.h
-/home/workspace/FinalProject/src/game.h
-renderer.h
-/home/workspace/FinalProject/src/renderer.h
-
-/home/workspace/FinalProject/src/renderer.h
-SDL2/SDL.h
--
+/home/workspace/FinalProject/src/board.h
 vector
 -
-string
--
-game.h
-/home/workspace/FinalProject/src/game.h
 

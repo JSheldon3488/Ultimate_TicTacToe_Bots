@@ -2,6 +2,7 @@
 #include "controller.h"
 #include "game.h"
 #include "renderer.h"
+#include "board.h"
 
 int main()
 {
@@ -16,7 +17,10 @@ int main()
     Renderer renderer(ScreenWdith,ScreenHeight, TileWdith, TileHeight);
     //Create Test board and call Render
     while (true) {
-        renderer.Render(std::vector<std::string> {"x", "o", "", "", "", "", "", "", ""});
+        Board board;
+        board.grid[0].setState(State::Player1);
+        board.grid[1].setState(State::Player2);
+        renderer.Render(board);
     }
     //Create Controller
     //Create Game

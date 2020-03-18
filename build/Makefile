@@ -123,6 +123,33 @@ Ultimate_TicTacToe/fast:
 	$(MAKE) -f CMakeFiles/Ultimate_TicTacToe.dir/build.make CMakeFiles/Ultimate_TicTacToe.dir/build
 .PHONY : Ultimate_TicTacToe/fast
 
+src/board.o: src/board.cpp.o
+
+.PHONY : src/board.o
+
+# target to build an object file
+src/board.cpp.o:
+	$(MAKE) -f CMakeFiles/Ultimate_TicTacToe.dir/build.make CMakeFiles/Ultimate_TicTacToe.dir/src/board.cpp.o
+.PHONY : src/board.cpp.o
+
+src/board.i: src/board.cpp.i
+
+.PHONY : src/board.i
+
+# target to preprocess a source file
+src/board.cpp.i:
+	$(MAKE) -f CMakeFiles/Ultimate_TicTacToe.dir/build.make CMakeFiles/Ultimate_TicTacToe.dir/src/board.cpp.i
+.PHONY : src/board.cpp.i
+
+src/board.s: src/board.cpp.s
+
+.PHONY : src/board.s
+
+# target to generate assembly for a file
+src/board.cpp.s:
+	$(MAKE) -f CMakeFiles/Ultimate_TicTacToe.dir/build.make CMakeFiles/Ultimate_TicTacToe.dir/src/board.cpp.s
+.PHONY : src/board.cpp.s
+
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -186,6 +213,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... Ultimate_TicTacToe"
 	@echo "... edit_cache"
+	@echo "... src/board.o"
+	@echo "... src/board.i"
+	@echo "... src/board.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
