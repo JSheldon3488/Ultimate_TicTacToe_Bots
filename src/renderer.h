@@ -22,6 +22,9 @@ private:
     const std::size_t screen_height;
     const std::size_t tile_width;
     const std::size_t tile_height;
+
+    void drawX(SDL_Renderer *renderer, const int row, const int col);
+    void drawY(SDL_Renderer *renderer, const int row, const int col);
 };
 
 #endif

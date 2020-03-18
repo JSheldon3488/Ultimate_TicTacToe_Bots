@@ -96,11 +96,39 @@ CMakeFiles/Ultimate_TicTacToe.dir/src/board.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Ultimate_TicTacToe.dir/src/board.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/workspace/FinalProject/src/board.cpp -o CMakeFiles/Ultimate_TicTacToe.dir/src/board.cpp.s
 
+CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_gfxPrimitives.c.o: CMakeFiles/Ultimate_TicTacToe.dir/flags.make
+CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_gfxPrimitives.c.o: ../dependencies/SDL2_gfxPrimitives.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/workspace/FinalProject/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_gfxPrimitives.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_gfxPrimitives.c.o   -c /home/workspace/FinalProject/dependencies/SDL2_gfxPrimitives.c
+
+CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_gfxPrimitives.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_gfxPrimitives.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/workspace/FinalProject/dependencies/SDL2_gfxPrimitives.c > CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_gfxPrimitives.c.i
+
+CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_gfxPrimitives.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_gfxPrimitives.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/workspace/FinalProject/dependencies/SDL2_gfxPrimitives.c -o CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_gfxPrimitives.c.s
+
+CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_rotozoom.c.o: CMakeFiles/Ultimate_TicTacToe.dir/flags.make
+CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_rotozoom.c.o: ../dependencies/SDL2_rotozoom.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/workspace/FinalProject/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_rotozoom.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_rotozoom.c.o   -c /home/workspace/FinalProject/dependencies/SDL2_rotozoom.c
+
+CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_rotozoom.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_rotozoom.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/workspace/FinalProject/dependencies/SDL2_rotozoom.c > CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_rotozoom.c.i
+
+CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_rotozoom.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_rotozoom.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/workspace/FinalProject/dependencies/SDL2_rotozoom.c -o CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_rotozoom.c.s
+
 # Object files for target Ultimate_TicTacToe
 Ultimate_TicTacToe_OBJECTS = \
 "CMakeFiles/Ultimate_TicTacToe.dir/src/main.cpp.o" \
 "CMakeFiles/Ultimate_TicTacToe.dir/src/renderer.cpp.o" \
-"CMakeFiles/Ultimate_TicTacToe.dir/src/board.cpp.o"
+"CMakeFiles/Ultimate_TicTacToe.dir/src/board.cpp.o" \
+"CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_gfxPrimitives.c.o" \
+"CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_rotozoom.c.o"
 
 # External object files for target Ultimate_TicTacToe
 Ultimate_TicTacToe_EXTERNAL_OBJECTS =
@@ -108,9 +136,11 @@ Ultimate_TicTacToe_EXTERNAL_OBJECTS =
 Ultimate_TicTacToe: CMakeFiles/Ultimate_TicTacToe.dir/src/main.cpp.o
 Ultimate_TicTacToe: CMakeFiles/Ultimate_TicTacToe.dir/src/renderer.cpp.o
 Ultimate_TicTacToe: CMakeFiles/Ultimate_TicTacToe.dir/src/board.cpp.o
+Ultimate_TicTacToe: CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_gfxPrimitives.c.o
+Ultimate_TicTacToe: CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_rotozoom.c.o
 Ultimate_TicTacToe: CMakeFiles/Ultimate_TicTacToe.dir/build.make
 Ultimate_TicTacToe: CMakeFiles/Ultimate_TicTacToe.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/workspace/FinalProject/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable Ultimate_TicTacToe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/workspace/FinalProject/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable Ultimate_TicTacToe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Ultimate_TicTacToe.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

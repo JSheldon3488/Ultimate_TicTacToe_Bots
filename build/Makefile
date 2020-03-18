@@ -123,6 +123,60 @@ Ultimate_TicTacToe/fast:
 	$(MAKE) -f CMakeFiles/Ultimate_TicTacToe.dir/build.make CMakeFiles/Ultimate_TicTacToe.dir/build
 .PHONY : Ultimate_TicTacToe/fast
 
+dependencies/SDL2_gfxPrimitives.o: dependencies/SDL2_gfxPrimitives.c.o
+
+.PHONY : dependencies/SDL2_gfxPrimitives.o
+
+# target to build an object file
+dependencies/SDL2_gfxPrimitives.c.o:
+	$(MAKE) -f CMakeFiles/Ultimate_TicTacToe.dir/build.make CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_gfxPrimitives.c.o
+.PHONY : dependencies/SDL2_gfxPrimitives.c.o
+
+dependencies/SDL2_gfxPrimitives.i: dependencies/SDL2_gfxPrimitives.c.i
+
+.PHONY : dependencies/SDL2_gfxPrimitives.i
+
+# target to preprocess a source file
+dependencies/SDL2_gfxPrimitives.c.i:
+	$(MAKE) -f CMakeFiles/Ultimate_TicTacToe.dir/build.make CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_gfxPrimitives.c.i
+.PHONY : dependencies/SDL2_gfxPrimitives.c.i
+
+dependencies/SDL2_gfxPrimitives.s: dependencies/SDL2_gfxPrimitives.c.s
+
+.PHONY : dependencies/SDL2_gfxPrimitives.s
+
+# target to generate assembly for a file
+dependencies/SDL2_gfxPrimitives.c.s:
+	$(MAKE) -f CMakeFiles/Ultimate_TicTacToe.dir/build.make CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_gfxPrimitives.c.s
+.PHONY : dependencies/SDL2_gfxPrimitives.c.s
+
+dependencies/SDL2_rotozoom.o: dependencies/SDL2_rotozoom.c.o
+
+.PHONY : dependencies/SDL2_rotozoom.o
+
+# target to build an object file
+dependencies/SDL2_rotozoom.c.o:
+	$(MAKE) -f CMakeFiles/Ultimate_TicTacToe.dir/build.make CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_rotozoom.c.o
+.PHONY : dependencies/SDL2_rotozoom.c.o
+
+dependencies/SDL2_rotozoom.i: dependencies/SDL2_rotozoom.c.i
+
+.PHONY : dependencies/SDL2_rotozoom.i
+
+# target to preprocess a source file
+dependencies/SDL2_rotozoom.c.i:
+	$(MAKE) -f CMakeFiles/Ultimate_TicTacToe.dir/build.make CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_rotozoom.c.i
+.PHONY : dependencies/SDL2_rotozoom.c.i
+
+dependencies/SDL2_rotozoom.s: dependencies/SDL2_rotozoom.c.s
+
+.PHONY : dependencies/SDL2_rotozoom.s
+
+# target to generate assembly for a file
+dependencies/SDL2_rotozoom.c.s:
+	$(MAKE) -f CMakeFiles/Ultimate_TicTacToe.dir/build.make CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_rotozoom.c.s
+.PHONY : dependencies/SDL2_rotozoom.c.s
+
 src/board.o: src/board.cpp.o
 
 .PHONY : src/board.o
@@ -213,6 +267,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... Ultimate_TicTacToe"
 	@echo "... edit_cache"
+	@echo "... dependencies/SDL2_gfxPrimitives.o"
+	@echo "... dependencies/SDL2_gfxPrimitives.i"
+	@echo "... dependencies/SDL2_gfxPrimitives.s"
+	@echo "... dependencies/SDL2_rotozoom.o"
+	@echo "... dependencies/SDL2_rotozoom.i"
+	@echo "... dependencies/SDL2_rotozoom.s"
 	@echo "... src/board.o"
 	@echo "... src/board.i"
 	@echo "... src/board.s"

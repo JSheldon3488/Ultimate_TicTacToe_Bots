@@ -1,4 +1,5 @@
 #include "renderer.h"
+#include "SDL2_gfxPrimitives.h"
 #include <iostream>
 
 Renderer::Renderer(const std::size_t screen_width,
@@ -50,6 +51,7 @@ void Renderer::Render(Board board) {
     }
 
     //Draw X's and O's
+    thickLineRGBA(_renderer, 0,0,240,240, 10, 0,0,0,255);
 
     //Update Window Title
 
