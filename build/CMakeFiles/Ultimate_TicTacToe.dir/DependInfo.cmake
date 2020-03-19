@@ -17,7 +17,7 @@ set(CMAKE_C_TARGET_INCLUDE_PATH
   "../dependencies"
   )
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/workspace/FinalProject/src/board.cpp" "/home/workspace/FinalProject/build/CMakeFiles/Ultimate_TicTacToe.dir/src/board.cpp.o"
+  "/home/workspace/FinalProject/src/gameObjects.cpp" "/home/workspace/FinalProject/build/CMakeFiles/Ultimate_TicTacToe.dir/src/gameObjects.cpp.o"
   "/home/workspace/FinalProject/src/main.cpp" "/home/workspace/FinalProject/build/CMakeFiles/Ultimate_TicTacToe.dir/src/main.cpp.o"
   "/home/workspace/FinalProject/src/renderer.cpp" "/home/workspace/FinalProject/build/CMakeFiles/Ultimate_TicTacToe.dir/src/renderer.cpp.o"
   )

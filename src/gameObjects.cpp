@@ -1,6 +1,17 @@
-#include "board.h"
+#include "gameObjects.h"
 
-Board::Board() {
+UltimateBoard::UltimateBoard() {
+    gameOver = false;
+    winner = State::Empty;
+    //Set up board
+    for (int row = 0; row < 3; row++) {
+        for (int col = 0; col < 3; col++) {
+            boards.emplace_back(Board(row,col));
+        }
+    }
+}
+
+Board::Board(int row, int col) : row(row), col(col) {
     currentWinner = State::Empty;
     isActive = true;
     //Set up a empty board

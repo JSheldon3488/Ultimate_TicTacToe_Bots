@@ -177,32 +177,32 @@ dependencies/SDL2_rotozoom.c.s:
 	$(MAKE) -f CMakeFiles/Ultimate_TicTacToe.dir/build.make CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_rotozoom.c.s
 .PHONY : dependencies/SDL2_rotozoom.c.s
 
-src/board.o: src/board.cpp.o
+src/gameObjects.o: src/gameObjects.cpp.o
 
-.PHONY : src/board.o
+.PHONY : src/gameObjects.o
 
 # target to build an object file
-src/board.cpp.o:
-	$(MAKE) -f CMakeFiles/Ultimate_TicTacToe.dir/build.make CMakeFiles/Ultimate_TicTacToe.dir/src/board.cpp.o
-.PHONY : src/board.cpp.o
+src/gameObjects.cpp.o:
+	$(MAKE) -f CMakeFiles/Ultimate_TicTacToe.dir/build.make CMakeFiles/Ultimate_TicTacToe.dir/src/gameObjects.cpp.o
+.PHONY : src/gameObjects.cpp.o
 
-src/board.i: src/board.cpp.i
+src/gameObjects.i: src/gameObjects.cpp.i
 
-.PHONY : src/board.i
+.PHONY : src/gameObjects.i
 
 # target to preprocess a source file
-src/board.cpp.i:
-	$(MAKE) -f CMakeFiles/Ultimate_TicTacToe.dir/build.make CMakeFiles/Ultimate_TicTacToe.dir/src/board.cpp.i
-.PHONY : src/board.cpp.i
+src/gameObjects.cpp.i:
+	$(MAKE) -f CMakeFiles/Ultimate_TicTacToe.dir/build.make CMakeFiles/Ultimate_TicTacToe.dir/src/gameObjects.cpp.i
+.PHONY : src/gameObjects.cpp.i
 
-src/board.s: src/board.cpp.s
+src/gameObjects.s: src/gameObjects.cpp.s
 
-.PHONY : src/board.s
+.PHONY : src/gameObjects.s
 
 # target to generate assembly for a file
-src/board.cpp.s:
-	$(MAKE) -f CMakeFiles/Ultimate_TicTacToe.dir/build.make CMakeFiles/Ultimate_TicTacToe.dir/src/board.cpp.s
-.PHONY : src/board.cpp.s
+src/gameObjects.cpp.s:
+	$(MAKE) -f CMakeFiles/Ultimate_TicTacToe.dir/build.make CMakeFiles/Ultimate_TicTacToe.dir/src/gameObjects.cpp.s
+.PHONY : src/gameObjects.cpp.s
 
 src/main.o: src/main.cpp.o
 
@@ -273,9 +273,9 @@ help:
 	@echo "... dependencies/SDL2_rotozoom.o"
 	@echo "... dependencies/SDL2_rotozoom.i"
 	@echo "... dependencies/SDL2_rotozoom.s"
-	@echo "... src/board.o"
-	@echo "... src/board.i"
-	@echo "... src/board.s"
+	@echo "... src/gameObjects.o"
+	@echo "... src/gameObjects.i"
+	@echo "... src/gameObjects.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

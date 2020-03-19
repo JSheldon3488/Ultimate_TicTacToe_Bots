@@ -32,24 +32,28 @@ Renderer::~Renderer() {
     SDL_Quit();
 }
 
-void Renderer::Render(Board board) {
+void Renderer::Render(UltimateBoard boards) {
     //Rectangle used for rendering the tiles
     SDL_Rect rect;
-    rect.w = tile_width;
-    rect.h = tile_height;
 
     //Clear Screen
-    SDL_SetRenderDrawColor(_renderer, 255,255,255,0xFF);
+    SDL_SetRenderDrawColor(_renderer, 211,211,211,255);
     SDL_RenderClear(_renderer);
 
     //Draw Grid
-    for (Tile tile : board.grid) {
-        SDL_SetRenderDrawColor(_renderer, 0,0,0,0xFF);
-        rect.x = tile.row * rect.w;
-        rect.y = tile.col * rect.h;
-        SDL_RenderDrawRect(_renderer, &rect);
+    for (Board board : boards.boards) {
+        for (Tile tile : board.grid) {
+            rect.x = board.col*3*tile_width + tile.col*tile_width + board.col*20;
+            rect.y = board.row*3*tile_height + tile.row*tile_height + board.row*20;
+            rect.w = tile_width;
+            rect.h = tile_height;
+            SDL_SetRenderDrawColor(_renderer, 255,255,255,255);
+            SDL_RenderFillRect(_renderer, &rect);
+            SDL_SetRenderDrawColor(_renderer, 0,0,0,255);
+            SDL_RenderDrawRect(_renderer, &rect);
+        }
     }
-
+    /*
     //Draw X's and O's
     for (int row = 0; row < 3; row++) {
         for (int col = 0; col < 3; col++) {
@@ -63,11 +67,13 @@ void Renderer::Render(Board board) {
             }
         }
     }
+    */
 
     //Update Window Title
 
     //Update Screen
     SDL_RenderPresent(_renderer);
+    SDL_Delay(5000);
 }
 void UpdateWindowTitle() {
     return;

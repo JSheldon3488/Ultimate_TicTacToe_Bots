@@ -94,19 +94,19 @@ CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_rotozoom.c.o
  /usr/include/SDL2/SDL_video.h
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
-CMakeFiles/Ultimate_TicTacToe.dir/src/board.cpp.o
- /home/workspace/FinalProject/src/board.cpp
- /home/workspace/FinalProject/src/board.h
+CMakeFiles/Ultimate_TicTacToe.dir/src/gameObjects.cpp.o
+ /home/workspace/FinalProject/src/gameObjects.cpp
+ /home/workspace/FinalProject/src/gameObjects.h
 CMakeFiles/Ultimate_TicTacToe.dir/src/main.cpp.o
- /home/workspace/FinalProject/src/board.h
  /home/workspace/FinalProject/src/controller.h
  /home/workspace/FinalProject/src/game.h
+ /home/workspace/FinalProject/src/gameObjects.h
  /home/workspace/FinalProject/src/main.cpp
  /home/workspace/FinalProject/src/renderer.h
 CMakeFiles/Ultimate_TicTacToe.dir/src/renderer.cpp.o
  ../dependencies/SDL2_gfxPrimitives.h
- /home/workspace/FinalProject/src/board.h
  /home/workspace/FinalProject/src/game.h
+ /home/workspace/FinalProject/src/gameObjects.h
  /home/workspace/FinalProject/src/renderer.cpp
  /home/workspace/FinalProject/src/renderer.h
  /usr/include/SDL2/SDL.h

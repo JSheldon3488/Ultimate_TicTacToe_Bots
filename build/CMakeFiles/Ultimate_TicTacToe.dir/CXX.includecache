@@ -12,25 +12,11 @@ math.h
 SDL.h
 ../dependencies/SDL.h
 
-/home/workspace/FinalProject/src/board.h
+/home/workspace/FinalProject/src/game.h
+
+/home/workspace/FinalProject/src/gameObjects.h
 vector
 -
-
-/home/workspace/FinalProject/src/controller.h
-
-/home/workspace/FinalProject/src/game.h
-
-/home/workspace/FinalProject/src/main.cpp
-iostream
--
-controller.h
-/home/workspace/FinalProject/src/controller.h
-game.h
-/home/workspace/FinalProject/src/game.h
-renderer.h
-/home/workspace/FinalProject/src/renderer.h
-board.h
-/home/workspace/FinalProject/src/board.h
 
 /home/workspace/FinalProject/src/renderer.cpp
 renderer.h
@@ -49,8 +35,8 @@ string
 -
 game.h
 /home/workspace/FinalProject/src/game.h
-board.h
-/home/workspace/FinalProject/src/board.h
+gameObjects.h
+/home/workspace/FinalProject/src/gameObjects.h
 
 /usr/include/SDL2/SDL.h
 SDL_main.h
