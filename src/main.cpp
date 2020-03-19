@@ -7,10 +7,10 @@
 int main()
 {
     //Set up Necessary Variables
-    const std::size_t ScreenWdith{720};
-    const std::size_t ScreenHeight{720};
-    const std::size_t TileWdith{240};
-    const std::size_t TileHeight{240};
+    const std::size_t ScreenWdith{1100};
+    const std::size_t ScreenHeight{1100};
+    const std::size_t TileWdith{120};
+    const std::size_t TileHeight{120};
 
     //Create everything needed to run the application
     //Create RenderObject
