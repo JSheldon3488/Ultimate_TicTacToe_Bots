@@ -51,8 +51,18 @@ void Renderer::Render(Board board) {
     }
 
     //Draw X's and O's
-    drawX(_renderer, 0,0);
-    drawO(_renderer,0,1);
+    for (int row = 0; row < 3; row++) {
+        for (int col = 0; col < 3; col++) {
+            Tile currentPosition = board.grid[(row*3+col)];
+            if (currentPosition.isOccupied) {
+                //Draw X for Player1 or O for player2
+                if (currentPosition.getState() == State::Player1) {
+                    drawX(_renderer,row,col);
+                }
+                else {drawO(_renderer,row,col);}
+            }
+        }
+    }
 
     //Update Window Title
 
@@ -64,14 +74,14 @@ void UpdateWindowTitle() {
 }
 
 void Renderer::drawX(SDL_Renderer *renderer, const int row, const int col) {
-    const float topLeftX = row*tile_width + 0.25*tile_width;
-    const float topLeftY = col*tile_height + 0.25*tile_height;
-    const float bottomRightX = row*tile_width + 0.75*tile_width;
-    const float bottomRightY = col*tile_height + 0.75*tile_height;
-    const float bottomLeftX = row*tile_width + 0.25*tile_width;
-    const float bottomLeftY = col*tile_height + 0.75*tile_height;
-    const float topRightX = row*tile_width + 0.75*tile_width;
-    const float topRightY = col*tile_height + 0.25*tile_height;
+    const float topLeftY = row*tile_width + 0.25*tile_width;
+    const float topLeftX = col*tile_height + 0.25*tile_height;
+    const float bottomRightY = row*tile_width + 0.75*tile_width;
+    const float bottomRightX = col*tile_height + 0.75*tile_height;
+    const float bottomLeftY = row*tile_width + 0.25*tile_width;
+    const float bottomLeftX = col*tile_height + 0.75*tile_height;
+    const float topRightY = row*tile_width + 0.75*tile_width;
+    const float topRightX = col*tile_height + 0.25*tile_height;
     //Draw left-top to right-bottom diagonal
     thickLineRGBA(renderer, topLeftX,topLeftY,bottomRightX,bottomRightY, 10, 250,0,0,255);
     //Draw left-bottom to right-top diagonal
@@ -80,8 +90,8 @@ void Renderer::drawX(SDL_Renderer *renderer, const int row, const int col) {
 
 void Renderer::drawO(SDL_Renderer *renderer, const int row, const int col) {
     const float radius = 0.25*tile_width;
-    const float centerX = 0.5*tile_width + row*tile_width;
-    const float centerY = 0.5*tile_height + col*tile_height;
+    const float centerY = 0.5*tile_width + row*tile_width;
+    const float centerX = 0.5*tile_height + col*tile_height;
     //Draw colorful outter circle
     filledCircleRGBA(renderer, centerX,centerY, radius+5, 0,255,0, 255);
     //Draw white inner circle to make appearance of O
