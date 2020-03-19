@@ -23,8 +23,8 @@ private:
     const std::size_t tile_width;
     const std::size_t tile_height;
 
-    void drawX(SDL_Renderer *renderer, const int row, const int col);
-    void drawO(SDL_Renderer *renderer, const int row, const int col);
+    void drawX(SDL_Renderer *renderer, const int board_row, const int board_col, const int row, const int col);
+    void drawO(SDL_Renderer *renderer, const int board_row, const int board_col, const bool active, const int row, const int col);
 };
 
 #endif

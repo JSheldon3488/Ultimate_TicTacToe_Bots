@@ -21,9 +21,9 @@ int main()
     boards.boards[0].grid[1].setState(State::Player2);
     boards.boards[1].grid[0].setState(State::Player1);
     boards.boards[1].grid[1].setState(State::Player2);
-    boards.boards[7].grid[0].setState(State::Player1);
-    boards.boards[7].grid[1].setState(State::Player2);
-    boards.boards[6].isActive = false;
+    boards.boards[7].grid[5].setState(State::Player1);
+    boards.boards[7].grid[6].setState(State::Player2);
+    boards.boards[7].isActive = false;
     renderer.Render(boards);
     //Create Controller
     //Create Game
