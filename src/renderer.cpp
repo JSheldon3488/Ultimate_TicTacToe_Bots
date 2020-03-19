@@ -51,7 +51,8 @@ void Renderer::Render(Board board) {
     }
 
     //Draw X's and O's
-    thickLineRGBA(_renderer, 0,0,240,240, 10, 0,0,0,255);
+    drawX(_renderer, 0,0);
+    drawO(_renderer,0,1);
 
     //Update Window Title
 
@@ -61,3 +62,28 @@ void Renderer::Render(Board board) {
 void UpdateWindowTitle() {
     return;
 }
+
+void Renderer::drawX(SDL_Renderer *renderer, const int row, const int col) {
+    const float topLeftX = row*tile_width + 0.25*tile_width;
+    const float topLeftY = col*tile_height + 0.25*tile_height;
+    const float bottomRightX = row*tile_width + 0.75*tile_width;
+    const float bottomRightY = col*tile_height + 0.75*tile_height;
+    const float bottomLeftX = row*tile_width + 0.25*tile_width;
+    const float bottomLeftY = col*tile_height + 0.75*tile_height;
+    const float topRightX = row*tile_width + 0.75*tile_width;
+    const float topRightY = col*tile_height + 0.25*tile_height;
+    //Draw left-top to right-bottom diagonal
+    thickLineRGBA(renderer, topLeftX,topLeftY,bottomRightX,bottomRightY, 10, 250,0,0,255);
+    //Draw left-bottom to right-top diagonal
+    thickLineRGBA(renderer, bottomLeftX,bottomLeftY,topRightX,topRightY, 10, 255,0,0, 255);
+}
+
+void Renderer::drawO(SDL_Renderer *renderer, const int row, const int col) {
+    const float radius = 0.25*tile_width;
+    const float centerX = 0.5*tile_width + row*tile_width;
+    const float centerY = 0.5*tile_height + col*tile_height;
+    //Draw colorful outter circle
+    filledCircleRGBA(renderer, centerX,centerY, radius+5, 0,255,0, 255);
+    //Draw white inner circle to make appearance of O
+    filledCircleRGBA(renderer, centerX,centerY, radius-5, 255,255,255, 255);
+};
