@@ -6,6 +6,12 @@
 
 #IncludeRegexTransform: 
 
+/home/workspace/FinalProject/src/controller.cpp
+controller.h
+/home/workspace/FinalProject/src/controller.h
+iostream
+-
+
 /home/workspace/FinalProject/src/controller.h
 map
 -
