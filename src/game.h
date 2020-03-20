@@ -3,12 +3,13 @@
 
 #include "gameObjects.h"
 #include "renderer.h"
+#include "controller.h"
 
 
 class Game {
 public:
     Game();
-    void Run(Renderer &renderer);
+    void Run(Renderer &renderer, Controller &controller);
     UltimateBoard boards;
 
 private:

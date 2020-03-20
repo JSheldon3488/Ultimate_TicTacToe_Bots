@@ -75,7 +75,6 @@ void Renderer::Render(const UltimateBoard &boards) {
 
     //Update Screen
     SDL_RenderPresent(_renderer);
-    SDL_Delay(10000);
 }
 void UpdateWindowTitle() {
     return;

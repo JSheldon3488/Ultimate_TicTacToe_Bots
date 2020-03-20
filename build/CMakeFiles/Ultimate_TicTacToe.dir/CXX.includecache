@@ -7,32 +7,30 @@
 #IncludeRegexTransform: 
 
 /home/workspace/FinalProject/src/controller.h
+map
+-
+string
+-
+SDL2/SDL.h
+-
 
 /home/workspace/FinalProject/src/game.cpp
 game.h
 /home/workspace/FinalProject/src/game.h
+iostream
+-
 
 /home/workspace/FinalProject/src/game.h
 gameObjects.h
 /home/workspace/FinalProject/src/gameObjects.h
 renderer.h
 /home/workspace/FinalProject/src/renderer.h
+controller.h
+/home/workspace/FinalProject/src/controller.h
 
 /home/workspace/FinalProject/src/gameObjects.h
 vector
 -
-
-/home/workspace/FinalProject/src/main.cpp
-iostream
--
-controller.h
-/home/workspace/FinalProject/src/controller.h
-game.h
-/home/workspace/FinalProject/src/game.h
-renderer.h
-/home/workspace/FinalProject/src/renderer.h
-gameObjects.h
-/home/workspace/FinalProject/src/gameObjects.h
 
 /home/workspace/FinalProject/src/renderer.h
 SDL2/SDL.h

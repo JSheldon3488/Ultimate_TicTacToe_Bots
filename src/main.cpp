@@ -16,8 +16,9 @@ int main()
     //Create RenderObject
     Renderer renderer(ScreenWdith,ScreenHeight, TileWidth, TileHeight);
     //Create Controller
+    Controller controller(TileWidth, TileHeight);
     //Create Game
     Game game;
     //Run Game
-    game.Run(renderer);
+    game.Run(renderer, controller);
 }

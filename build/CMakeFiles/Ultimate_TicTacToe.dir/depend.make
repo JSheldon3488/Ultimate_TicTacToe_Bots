@@ -94,6 +94,10 @@ CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_rotozoom.c.o: /usr/include/S
 CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_rotozoom.c.o: /usr/include/SDL2/begin_code.h
 CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_rotozoom.c.o: /usr/include/SDL2/close_code.h
 
+CMakeFiles/Ultimate_TicTacToe.dir/src/controller.cpp.o: ../src/controller.cpp
+CMakeFiles/Ultimate_TicTacToe.dir/src/controller.cpp.o: ../src/controller.h
+
+CMakeFiles/Ultimate_TicTacToe.dir/src/game.cpp.o: ../src/controller.h
 CMakeFiles/Ultimate_TicTacToe.dir/src/game.cpp.o: ../src/game.cpp
 CMakeFiles/Ultimate_TicTacToe.dir/src/game.cpp.o: ../src/game.h
 CMakeFiles/Ultimate_TicTacToe.dir/src/game.cpp.o: ../src/gameObjects.h

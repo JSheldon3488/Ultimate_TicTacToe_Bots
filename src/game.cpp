@@ -1,5 +1,5 @@
 #include "game.h"
-
+#include <iostream>
 
 Game::Game() {
     UltimateBoard boards;
@@ -9,7 +9,7 @@ Game::Game() {
 }
 
 // Add Controller once its ready
-void Game::Run(Renderer &renderer) {
+void Game::Run(Renderer &renderer, Controller &controller) {
     //Test Run
     boards.boards[0].grid[0].setState(State::Player1);
     boards.boards[0].grid[1].setState(State::Player2);
@@ -20,6 +20,14 @@ void Game::Run(Renderer &renderer) {
     boards.boards[7].isActive = false;
     renderer.Render(boards);
 
+    //Test Controller
+    while (true) {
+        std::map<std::string, int> click = controller.HandleInput();
+        if (click["board"] != -2 || click["row"] != -2 || click["col"] != -2) {
+            std::cout << "Board: " << click["board"] << ", Row: " << click["row"] << ", Col: " << click["col"] << std::endl;
+            std::cout << "X: " << click["x"] << ", Y: " << click["y"] << std::endl;
+        }
+    }
     // Render Original Board
     // Loop until game is over
         // Loop waiting for valid move
