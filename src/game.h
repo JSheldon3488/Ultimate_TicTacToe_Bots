@@ -13,13 +13,12 @@ public:
     UltimateBoard boards;
 
 private:
-    void update(UltimateBoard &boards, int board, int row, int col);
+    void update(UltimateBoard &boards, State player, int board, int row, int col);
     bool isValidMove(UltimateBoard &boards, int board, int row, int col);
     bool checkforBoardWinner(Board &board);
     bool checkforUltimateWinner(UltimateBoard &boards);
 
     bool gameOver;
-    State currentPlayer;
     bool bot;
 };
 

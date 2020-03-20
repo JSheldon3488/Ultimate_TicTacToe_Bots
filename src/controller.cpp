@@ -10,22 +10,17 @@
 */
 
 Controller::Controller(const size_t tile_width, const size_t tile_height) : tile_width(tile_width), tile_height(tile_height)
-{}
+{
+    hasMoved = false;
+}
 
-std::map<std::string, int> Controller::HandleInput() {
-    std::map<std::string, int> click_result;
-    // Cannot have initialized to 0's that is a real board position
-    click_result["board"] = -2;
-    click_result["row"] = -2;
-    click_result["col"] = -2;
-    
+void Controller::HandleInput(UltimateBoard &boards) {
     SDL_Event e;
-    while (SDL_PollEvent(&e)) {
+    while (!hasMoved) {
+        SDL_PollEvent(&e);
         if (e.type == SDL_QUIT) {
-            click_result["board"] = -1;
-            click_result["row"] = -1;
-            click_result["col"] = -1;
-            break;
+            boards.gameOver = true;
+            hasMoved = true;
         }
         else if (e.type == SDL_MOUSEBUTTONDOWN) {
             //Factor in additional spacing for x and y due to gaps between games
@@ -50,11 +45,28 @@ std::map<std::string, int> Controller::HandleInput() {
             // Solve for game #
             int game_col = adjusted_x/(3*tile_width);
             int game_row = adjusted_y/(3*tile_height);
-            click_result["board"] = (3*game_row + game_col);
+            int game_board = (3*game_row + game_col);
             // Solve for row and col
-            click_result["row"] = (adjusted_y - 3*tile_height*game_row)/tile_height;
-            click_result["col"] = (adjusted_x - 3*tile_width*game_col)/tile_width;      
+            int board_row = (adjusted_y - 3*tile_height*game_row)/tile_height;
+            int board_col = (adjusted_x - 3*tile_width*game_col)/tile_width;
+            //Check if a validMove
+            if (isValidMove(boards, game_board, game_row, game_col)) {
+                boards.boards[game_board].grid[(board_row*3 + board_col)].setState(boards.currentPlayer);
+                // Change Players 
+                boards.currentPlayer = boards.currentPlayer == State::Player1 ? State::Player2 : State::Player1;
+                hasMoved = true;
+            }
         }
     }
-    return click_result;
+    std::cout << "Leaving Handler" << std::endl;
+}
+
+bool Controller::isValidMove(UltimateBoard &boards, const int board, const int row, const int col) {
+    std::cout << "Entered isValid" << std::endl;
+    if (boards.boards[board].isActive) {
+        if (!boards.boards[board].grid[(3*row + col)].isOccupied) {
+            return true;
+        }
+    }
+    return false;
 }

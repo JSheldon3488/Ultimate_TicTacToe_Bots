@@ -97,6 +97,7 @@ CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_rotozoom.c.o
 CMakeFiles/Ultimate_TicTacToe.dir/src/controller.cpp.o
  /home/workspace/FinalProject/src/controller.cpp
  /home/workspace/FinalProject/src/controller.h
+ /home/workspace/FinalProject/src/gameObjects.h
 CMakeFiles/Ultimate_TicTacToe.dir/src/game.cpp.o
  /home/workspace/FinalProject/src/controller.h
  /home/workspace/FinalProject/src/game.cpp

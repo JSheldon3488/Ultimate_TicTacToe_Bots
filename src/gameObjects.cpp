@@ -2,6 +2,8 @@
 
 UltimateBoard::UltimateBoard() {
     winner = State::Empty;
+    gameOver = false;
+    currentPlayer = State::Player1;
     //Set up board
     for (int row = 0; row < 3; row++) {
         for (int col = 0; col < 3; col++) {
