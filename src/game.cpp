@@ -43,13 +43,22 @@ void update(UltimateBoard &boards, int board, int row, int col) {
 }
 
 bool isValidMove(UltimateBoard &boards, int board, int row, int col) {
+    // Get board from boards and check if it is Active board
+    // Get Tile from given board if it was active and check if isOccupied
+    // If gets threw both checks return true else return false
     return true;
 }
 
 bool checkforBoardWinner(Board &board) {
+    //Check all three rows
+    //Check all three columns
+    //Check two diagonals
     return true;
 }
 
 bool checkforUltimateWinner(UltimateBoard &boards) {
+    //Check all three rows
+    //Check all three columns
+    //Check two diagonals
     return true;
 }
