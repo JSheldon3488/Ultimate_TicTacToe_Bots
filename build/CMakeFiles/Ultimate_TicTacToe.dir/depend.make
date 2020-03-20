@@ -94,6 +94,11 @@ CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_rotozoom.c.o: /usr/include/S
 CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_rotozoom.c.o: /usr/include/SDL2/begin_code.h
 CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_rotozoom.c.o: /usr/include/SDL2/close_code.h
 
+CMakeFiles/Ultimate_TicTacToe.dir/src/game.cpp.o: ../src/game.cpp
+CMakeFiles/Ultimate_TicTacToe.dir/src/game.cpp.o: ../src/game.h
+CMakeFiles/Ultimate_TicTacToe.dir/src/game.cpp.o: ../src/gameObjects.h
+CMakeFiles/Ultimate_TicTacToe.dir/src/game.cpp.o: ../src/renderer.h
+
 CMakeFiles/Ultimate_TicTacToe.dir/src/gameObjects.cpp.o: ../src/gameObjects.cpp
 CMakeFiles/Ultimate_TicTacToe.dir/src/gameObjects.cpp.o: ../src/gameObjects.h
 
@@ -104,7 +109,6 @@ CMakeFiles/Ultimate_TicTacToe.dir/src/main.cpp.o: ../src/main.cpp
 CMakeFiles/Ultimate_TicTacToe.dir/src/main.cpp.o: ../src/renderer.h
 
 CMakeFiles/Ultimate_TicTacToe.dir/src/renderer.cpp.o: ../dependencies/SDL2_gfxPrimitives.h
-CMakeFiles/Ultimate_TicTacToe.dir/src/renderer.cpp.o: ../src/game.h
 CMakeFiles/Ultimate_TicTacToe.dir/src/renderer.cpp.o: ../src/gameObjects.h
 CMakeFiles/Ultimate_TicTacToe.dir/src/renderer.cpp.o: ../src/renderer.cpp
 CMakeFiles/Ultimate_TicTacToe.dir/src/renderer.cpp.o: ../src/renderer.h

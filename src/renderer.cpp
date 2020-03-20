@@ -32,7 +32,7 @@ Renderer::~Renderer() {
     SDL_Quit();
 }
 
-void Renderer::Render(UltimateBoard boards) {
+void Renderer::Render(const UltimateBoard &boards) {
     //Rectangle used for rendering the tiles
     SDL_Rect rect;
 
@@ -102,7 +102,9 @@ void Renderer::drawO(SDL_Renderer *renderer, const int board_row, const int boar
     const float centerX = 0.5*tile_width + col*tile_width + board_col*20 + 3*board_col*tile_width;
     //Draw colorful outter circle
     filledCircleRGBA(renderer, centerX,centerY, radius+5, 0,255,0, 255);
-    //Draw white inner circle to make appearance of O
-    if (active) { filledCircleRGBA(renderer, centerX,centerY, radius-5, 255,255,255, 255);}
+    //Draw inner circle to make appearance of O
+    if (active) { 
+        filledCircleRGBA(renderer, centerX,centerY, radius-5, 255,255,255, 255);
+    }
     else { filledCircleRGBA(renderer, centerX,centerY, radius-5, 105,105,105, 255); }
 };

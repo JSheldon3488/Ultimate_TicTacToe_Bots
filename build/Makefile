@@ -177,6 +177,33 @@ dependencies/SDL2_rotozoom.c.s:
 	$(MAKE) -f CMakeFiles/Ultimate_TicTacToe.dir/build.make CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_rotozoom.c.s
 .PHONY : dependencies/SDL2_rotozoom.c.s
 
+src/game.o: src/game.cpp.o
+
+.PHONY : src/game.o
+
+# target to build an object file
+src/game.cpp.o:
+	$(MAKE) -f CMakeFiles/Ultimate_TicTacToe.dir/build.make CMakeFiles/Ultimate_TicTacToe.dir/src/game.cpp.o
+.PHONY : src/game.cpp.o
+
+src/game.i: src/game.cpp.i
+
+.PHONY : src/game.i
+
+# target to preprocess a source file
+src/game.cpp.i:
+	$(MAKE) -f CMakeFiles/Ultimate_TicTacToe.dir/build.make CMakeFiles/Ultimate_TicTacToe.dir/src/game.cpp.i
+.PHONY : src/game.cpp.i
+
+src/game.s: src/game.cpp.s
+
+.PHONY : src/game.s
+
+# target to generate assembly for a file
+src/game.cpp.s:
+	$(MAKE) -f CMakeFiles/Ultimate_TicTacToe.dir/build.make CMakeFiles/Ultimate_TicTacToe.dir/src/game.cpp.s
+.PHONY : src/game.cpp.s
+
 src/gameObjects.o: src/gameObjects.cpp.o
 
 .PHONY : src/gameObjects.o
@@ -273,6 +300,9 @@ help:
 	@echo "... dependencies/SDL2_rotozoom.o"
 	@echo "... dependencies/SDL2_rotozoom.i"
 	@echo "... dependencies/SDL2_rotozoom.s"
+	@echo "... src/game.o"
+	@echo "... src/game.i"
+	@echo "... src/game.s"
 	@echo "... src/gameObjects.o"
 	@echo "... src/gameObjects.i"
 	@echo "... src/gameObjects.s"

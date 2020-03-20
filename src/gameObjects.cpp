@@ -1,7 +1,6 @@
 #include "gameObjects.h"
 
 UltimateBoard::UltimateBoard() {
-    gameOver = false;
     winner = State::Empty;
     //Set up board
     for (int row = 0; row < 3; row++) {
@@ -12,7 +11,7 @@ UltimateBoard::UltimateBoard() {
 }
 
 Board::Board(int row, int col) : row(row), col(col) {
-    currentWinner = State::Empty;
+    winner = State::Empty;
     isActive = true;
     //Set up a empty board
     for (int row = 0; row < 3; row++) {

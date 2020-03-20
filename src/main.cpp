@@ -15,17 +15,9 @@ int main()
     //Create everything needed to run the application
     //Create RenderObject
     Renderer renderer(ScreenWdith,ScreenHeight, TileWidth, TileHeight);
-    //Create Test board and call Render
-    UltimateBoard boards;
-    boards.boards[0].grid[0].setState(State::Player1);
-    boards.boards[0].grid[1].setState(State::Player2);
-    boards.boards[1].grid[0].setState(State::Player1);
-    boards.boards[1].grid[1].setState(State::Player2);
-    boards.boards[7].grid[5].setState(State::Player1);
-    boards.boards[7].grid[6].setState(State::Player2);
-    boards.boards[7].isActive = false;
-    renderer.Render(boards);
     //Create Controller
     //Create Game
+    Game game;
     //Run Game
+    game.Run(renderer);
 }

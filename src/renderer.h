@@ -4,7 +4,6 @@
 #include <SDL2/SDL.h>
 #include <vector>
 #include <string>
-#include "game.h"
 #include "gameObjects.h"
 
 
@@ -12,7 +11,7 @@ class Renderer {
 public:
     Renderer(const std::size_t screen_width, const std::size_t screen_height, const std::size_t tile_width, const std::size_t tile_height);
     ~Renderer();
-    void Render(UltimateBoard boards);
+    void Render(const UltimateBoard &boards);
     void UpdateWindowTitle();
 
 private:

@@ -9,7 +9,6 @@ enum State {
     Player2,
 };
 
-
 class Tile {
 public:
     Tile(const int row, const int col);
@@ -35,7 +34,7 @@ class Board {
 public:
     Board(int row, int col);
     std::vector<Tile> grid;
-    State currentWinner;
+    State winner;
     bool isActive;
     const int row;
     const int col;
@@ -46,7 +45,6 @@ public:
     UltimateBoard();
     std::vector<Board> boards;
     State winner;
-    bool gameOver;
 };
 
 #endif
