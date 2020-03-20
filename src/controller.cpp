@@ -16,6 +16,12 @@ Controller::Controller(const size_t tile_width, const size_t tile_height) : tile
 
 void Controller::HandleInput(UltimateBoard &boards) {
     SDL_Event e;
+    int game_col;
+    int game_row;
+    int game_board;
+    int board_row;
+    int board_col;
+
     while (!hasMoved) {
         SDL_PollEvent(&e);
         if (e.type == SDL_QUIT) {
@@ -43,14 +49,16 @@ void Controller::HandleInput(UltimateBoard &boards) {
 
             //Convert coordinates to a game #, row in that game, and column in that game.
             // Solve for game #
-            int game_col = adjusted_x/(3*tile_width);
-            int game_row = adjusted_y/(3*tile_height);
-            int game_board = (3*game_row + game_col);
+            game_col = adjusted_x/(3*tile_width);
+            game_row = adjusted_y/(3*tile_height);
+            game_board = (3*game_row + game_col);
             // Solve for row and col
-            int board_row = (adjusted_y - 3*tile_height*game_row)/tile_height;
-            int board_col = (adjusted_x - 3*tile_width*game_col)/tile_width;
+            board_row = (adjusted_y - 3*tile_height*game_row)/tile_height;
+            board_col = (adjusted_x - 3*tile_width*game_col)/tile_width;
+            
             //Check if a validMove
-            if (isValidMove(boards, game_board, game_row, game_col)) {
+            if (isValidMove(boards, game_board, board_row, board_col)) {
+                //Update boards
                 boards.boards[game_board].grid[(board_row*3 + board_col)].setState(boards.currentPlayer);
                 // Change Players 
                 boards.currentPlayer = boards.currentPlayer == State::Player1 ? State::Player2 : State::Player1;
@@ -58,11 +66,9 @@ void Controller::HandleInput(UltimateBoard &boards) {
             }
         }
     }
-    std::cout << "Leaving Handler" << std::endl;
 }
 
 bool Controller::isValidMove(UltimateBoard &boards, const int board, const int row, const int col) {
-    std::cout << "Entered isValid" << std::endl;
     if (boards.boards[board].isActive) {
         if (!boards.boards[board].grid[(3*row + col)].isOccupied) {
             return true;

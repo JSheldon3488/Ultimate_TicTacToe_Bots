@@ -14,7 +14,6 @@ public:
 
 private:
     void update(UltimateBoard &boards, State player, int board, int row, int col);
-    bool isValidMove(UltimateBoard &boards, int board, int row, int col);
     bool checkforBoardWinner(Board &board);
     bool checkforUltimateWinner(UltimateBoard &boards);
 
