@@ -14,8 +14,9 @@ public:
 
 private:
     void update(UltimateBoard &ultimateBoard, int board, int row, int col);
-    bool checkforBoardWinner(Board &ultimateBoard);
-    bool checkforUltimateWinner(UltimateBoard &ultimateBoard);
+    void checkforBoardWinner(Board &board);
+    void checkforUltimateWinner(UltimateBoard &ultimateBoard);
+    void setActiveBoards(UltimateBoard &ultimateBoard, int activeBoard);
 
     bool gameOver;
     bool bot;
