@@ -14,63 +14,65 @@ Controller::Controller(const size_t tile_width, const size_t tile_height) : tile
     hasMoved = false;
 }
 
-void Controller::HandleInput(UltimateBoard &boards) {
+std::map<std::string, int> Controller::HandleInput(UltimateBoard &ultimateBoard) {
     SDL_Event e;
-    int game_col;
-    int game_row;
-    int game_board;
+    int ultimate_col;
+    int ultimate_row;
+    int ultimate_board;
     int board_row;
     int board_col;
+    std::map<std::string, int> click;
+    //Initial values set for testing
+    click["board"] = -1;
+    click["row"] = -1;
+    click["col"] = -1;
 
+    // Loop until you receive a valid move
     while (!hasMoved) {
         SDL_PollEvent(&e);
         if (e.type == SDL_QUIT) {
-            boards.gameOver = true;
+            ultimateBoard.gameOver = true;
             hasMoved = true;
         }
         else if (e.type == SDL_MOUSEBUTTONDOWN) {
-            //Factor in additional spacing for x and y due to gaps between games
+            //Factor in additional spacing for x and y due to the gaps between boards
             int adjusted_x = e.button.x;
             int adjusted_y = e.button.y;
             // Adjust x coordinate
-            if (e.button.x > tile_width*6+40) {
-                adjusted_x -= 40;
-            }
-            else if (e.button.x > tile_width*3+20) {
-                adjusted_x -= 20;
-            }
+            if (e.button.x > tile_width*6+40) { adjusted_x -= 40; }
+            else if (e.button.x > tile_width*3+20) { adjusted_x -= 20; }
             // Adjust y coordinate
-            if (e.button.y > tile_height*6+40) {
-                adjusted_y -= 40;
-            }
-            else if (e.button.y > tile_height*3+20) {
-                adjusted_y -= 20;
-            }
+            if (e.button.y > tile_height*6+40) { adjusted_y -= 40; }
+            else if (e.button.y > tile_height*3+20) { adjusted_y -= 20; }
 
-            //Convert coordinates to a game #, row in that game, and column in that game.
-            // Solve for game #
-            game_col = adjusted_x/(3*tile_width);
-            game_row = adjusted_y/(3*tile_height);
-            game_board = (3*game_row + game_col);
+            //Convert coordinates to a board #, row in that board, and column in that board.
+            // Solve for board #
+            ultimate_col = adjusted_x/(3*tile_width);
+            ultimate_row = adjusted_y/(3*tile_height);
+            ultimate_board = (3*ultimate_row + ultimate_col);
             // Solve for row and col
-            board_row = (adjusted_y - 3*tile_height*game_row)/tile_height;
-            board_col = (adjusted_x - 3*tile_width*game_col)/tile_width;
+            board_row = (adjusted_y - 3*tile_height*ultimate_row)/tile_height;
+            board_col = (adjusted_x - 3*tile_width*ultimate_col)/tile_width;
             
             //Check if a validMove
-            if (isValidMove(boards, game_board, board_row, board_col)) {
+            if (isValidMove(ultimateBoard, ultimate_board, board_row, board_col)) {
                 //Update boards
-                boards.boards[game_board].grid[(board_row*3 + board_col)].setState(boards.currentPlayer);
-                // Change Players 
-                boards.currentPlayer = boards.currentPlayer == State::Player1 ? State::Player2 : State::Player1;
+                ultimateBoard.boards[ultimate_board].grid[(board_row*3 + board_col)].setState(ultimateBoard.currentPlayer);
                 hasMoved = true;
+                // Return where the move happened
+                    click["board"] = ultimate_board;
+                    click["row"] = board_row;
+                    click["col"] = board_col;
+                    return click;
             }
         }
     }
+    return click;
 }
 
-bool Controller::isValidMove(UltimateBoard &boards, const int board, const int row, const int col) {
-    if (boards.boards[board].isActive) {
-        if (!boards.boards[board].grid[(3*row + col)].isOccupied) {
+bool Controller::isValidMove(UltimateBoard &ultimateBoard, const int board, const int row, const int col) {
+    if (ultimateBoard.boards[board].isActive) {
+        if (!ultimateBoard.boards[board].grid[(3*row + col)].isOccupied) {
             return true;
         }
     }

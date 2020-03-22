@@ -10,12 +10,12 @@ class Game {
 public:
     Game();
     void Run(Renderer &renderer, Controller &controller);
-    UltimateBoard boards;
+    UltimateBoard ultimateBoard;
 
 private:
-    void update(UltimateBoard &boards, State player, int board, int row, int col);
-    bool checkforBoardWinner(Board &board);
-    bool checkforUltimateWinner(UltimateBoard &boards);
+    void update(UltimateBoard &ultimateBoard, int board, int row, int col);
+    bool checkforBoardWinner(Board &ultimateBoard);
+    bool checkforUltimateWinner(UltimateBoard &ultimateBoard);
 
     bool gameOver;
     bool bot;
