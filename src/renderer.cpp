@@ -47,8 +47,14 @@ void Renderer::Render(const UltimateBoard &boards) {
             rect.y = board.row*3*tile_height + tile.row*tile_height + board.row*20;
             rect.w = tile_width;
             rect.h = tile_height;
-            if (board.isActive) { SDL_SetRenderDrawColor(_renderer, 255,255,255,255);}
-            else { SDL_SetRenderDrawColor(_renderer, 105,105,105,255); }
+
+            // Set correct background color for the board
+            if (board.winner == State::Player1) { SDL_SetRenderDrawColor(_renderer, 255,102,102,255);}
+            else if (board.winner == State::Player2) {SDL_SetRenderDrawColor(_renderer, 153,255,153,255);}
+            else if (!board.isActive) {SDL_SetRenderDrawColor(_renderer, 105,105,105,255);}
+            else { SDL_SetRenderDrawColor(_renderer, 255,255,255,255); }
+            
+            //Draw tile
             SDL_RenderFillRect(_renderer, &rect);
             SDL_SetRenderDrawColor(_renderer, 0,0,0,255);
             SDL_RenderDrawRect(_renderer, &rect);
@@ -65,7 +71,7 @@ void Renderer::Render(const UltimateBoard &boards) {
                     if (currentPosition.getState() == State::Player1) {
                         drawX(_renderer, board.row, board.col, row,col);
                     }
-                    else {drawO(_renderer, board.row, board.col, board.isActive, row,col);}
+                    else {drawO(_renderer, board.row, board.col, board.isActive, board.winner, row,col);}
                 }
             }
         }
@@ -95,7 +101,7 @@ void Renderer::drawX(SDL_Renderer *renderer, const int board_row, const int boar
     thickLineRGBA(renderer, bottomLeftX,bottomLeftY,topRightX,topRightY, 10, 255,0,0, 255);
 }
 
-void Renderer::drawO(SDL_Renderer *renderer, const int board_row, const int board_col, const bool active, const int row, const int col) {
+void Renderer::drawO(SDL_Renderer *renderer, const int board_row, const int board_col, const bool active, const bool winner, const int row, const int col) {
     const float radius = 0.25*tile_width;
     const float centerY = 0.5*tile_height + row*tile_height + board_row*20 + 3*board_row*tile_height;
     const float centerX = 0.5*tile_width + col*tile_width + board_col*20 + 3*board_col*tile_width;
@@ -104,6 +110,9 @@ void Renderer::drawO(SDL_Renderer *renderer, const int board_row, const int boar
     //Draw inner circle to make appearance of O
     if (active) { 
         filledCircleRGBA(renderer, centerX,centerY, radius-5, 255,255,255, 255);
+    }
+    else if (winner) {
+        filledCircleRGBA(renderer, centerX,centerY, radius-5, 153,255,153, 255);
     }
     else { filledCircleRGBA(renderer, centerX,centerY, radius-5, 105,105,105, 255); }
 };
