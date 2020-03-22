@@ -22,7 +22,6 @@ void Game::Run(Renderer &renderer, Controller &controller) {
         // Update Game State
         update(ultimateBoard, click["board"], click["row"], click["col"]);
 
-
         // Render new board
         renderer.Render(ultimateBoard);
     }
@@ -54,8 +53,8 @@ void Game::checkforBoardWinner(Board &board) {
         if (board.grid[r].getState() == board.grid[r+3].getState() &&
             board.grid[r].getState() == board.grid[r+6].getState() &&
             board.grid[r].getState() != State::Empty) {
-                board.winner = board.grid[r*3].getState();
-                std::cout << "Winner in a column" << std::endl;
+                board.winner = board.grid[r].getState();
+                std::cout << "Setting col " << r << " winner to: " << board.grid[r*3].getState() << std::endl;
                 return;
         }
     }
@@ -79,7 +78,6 @@ void Game::checkforUltimateWinner(UltimateBoard &ultimateBoard) {
             ultimateBoard.boards[r*3].winner == ultimateBoard.boards[r*3+2].winner &&
             ultimateBoard.boards[r*3].winner != State::Empty) {
                 ultimateBoard.winner = ultimateBoard.boards[r*3].winner;
-                std::cout << "Main winner in row" << std::endl;
                 gameOver = true;
                 return;
         }
@@ -87,10 +85,9 @@ void Game::checkforUltimateWinner(UltimateBoard &ultimateBoard) {
     //Check all three columns
     for (int r = 0; r < 3; r++) {
         if (ultimateBoard.boards[r].winner == ultimateBoard.boards[r+3].winner &&
-            ultimateBoard.boards[r].winner == ultimateBoard.boards[r*6].winner &&
+            ultimateBoard.boards[r].winner == ultimateBoard.boards[r+6].winner &&
             ultimateBoard.boards[r].winner != State::Empty) {
                 ultimateBoard.winner = ultimateBoard.boards[r].winner;
-                std::cout << "Main winner in col" << std::endl;
                 gameOver = true;
                 return;
         }
