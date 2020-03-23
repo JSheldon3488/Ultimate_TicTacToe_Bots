@@ -3,7 +3,11 @@
 UltimateBoard::UltimateBoard() {
     winner = State::Empty;
     gameOver = false;
-    currentPlayer = State::Player1;
+
+    //Set up who goes first
+    srand(time(NULL));
+    currentPlayer = (rand() %2) + 1 == 1 ? State::Player1 : State::Player2;
+    
     //Set up board
     for (int row = 0; row < 3; row++) {
         for (int col = 0; col < 3; col++) {

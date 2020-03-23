@@ -78,12 +78,14 @@ void Renderer::Render(const UltimateBoard &boards) {
     }
 
     //Update Window Title
+    UpdateWindowTitle(boards.currentPlayer);
 
     //Update Screen
     SDL_RenderPresent(_renderer);
 }
-void UpdateWindowTitle() {
-    return;
+void Renderer::UpdateWindowTitle(State player) {
+    std::string title = player == State::Player1 ? "Player X Turn" : "Player 0 Turn";
+    SDL_SetWindowTitle(_window, title.c_str());
 }
 
 void Renderer::drawX(SDL_Renderer *renderer, const int board_row, const int board_col, const int row, const int col) {

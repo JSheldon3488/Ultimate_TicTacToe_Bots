@@ -2,6 +2,9 @@
 #define GAMEOBJECTS_H
 
 #include <vector>
+#include <stdlib.h>
+#include <iostream>
+#include <time.h>
 
 enum State {
     Empty,
