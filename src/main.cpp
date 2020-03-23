@@ -13,11 +13,8 @@ int main()
     const std::size_t ScreenHeight{(TileHeight*9 + 40)};
 
     //Create everything needed to run the application
-    //Create RenderObject
     Renderer renderer(ScreenWdith,ScreenHeight, TileWidth, TileHeight);
-    //Create Controller
     Controller controller(TileWidth, TileHeight);
-    //Create Game
     Game game;
     //Run Game
     game.Run(renderer, controller);

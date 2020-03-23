@@ -2,7 +2,6 @@
 
 UltimateBoard::UltimateBoard() {
     winner = State::Empty;
-    gameOver = false;
 
     //Set up who goes first
     srand(time(NULL));

@@ -3,7 +3,6 @@
 #include <thread>
 
 Game::Game() {
-    UltimateBoard ultimateBoard;
     gameOver = false;
     bot = false;
 }
@@ -18,12 +17,16 @@ void Game::Run(Renderer &renderer, Controller &controller) {
         // Get User Input
         controller.hasMoved = false;
         auto click = controller.HandleInput(ultimateBoard);
-
-        // Update Game State
-        update(ultimateBoard, click["board"], click["row"], click["col"]);
-
-        // Render new board
-        renderer.Render(ultimateBoard);
+        
+        if (click["board"] == -1 && click["row"] == -1 && click["col"] == -1){
+            gameOver = true;
+        }
+        else {
+            // Update Game State
+            update(ultimateBoard, click["board"], click["row"], click["col"]);
+            // Render new board
+            renderer.Render(ultimateBoard);
+        }
     }
 }
 
@@ -54,7 +57,6 @@ void Game::checkforBoardWinner(Board &board) {
             board.grid[r].getState() == board.grid[r+6].getState() &&
             board.grid[r].getState() != State::Empty) {
                 board.winner = board.grid[r].getState();
-                std::cout << "Setting col " << r << " winner to: " << board.grid[r*3].getState() << std::endl;
                 return;
         }
     }

@@ -103,7 +103,7 @@ void Renderer::drawX(SDL_Renderer *renderer, const int board_row, const int boar
     thickLineRGBA(renderer, bottomLeftX,bottomLeftY,topRightX,topRightY, 10, 255,0,0, 255);
 }
 
-void Renderer::drawO(SDL_Renderer *renderer, const int board_row, const int board_col, const bool active, const bool winner, const int row, const int col) {
+void Renderer::drawO(SDL_Renderer *renderer, const int board_row, const int board_col, const bool active, State winner, const int row, const int col) {
     const float radius = 0.25*tile_width;
     const float centerY = 0.5*tile_height + row*tile_height + board_row*20 + 3*board_row*tile_height;
     const float centerX = 0.5*tile_width + col*tile_width + board_col*20 + 3*board_col*tile_width;
@@ -113,7 +113,10 @@ void Renderer::drawO(SDL_Renderer *renderer, const int board_row, const int boar
     if (active) { 
         filledCircleRGBA(renderer, centerX,centerY, radius-5, 255,255,255, 255);
     }
-    else if (winner) {
+    else if (winner == State::Player1) {
+        filledCircleRGBA(renderer, centerX,centerY, radius-5, 255,102,102, 255);
+    }
+    else if (winner == State::Player2) {
         filledCircleRGBA(renderer, centerX,centerY, radius-5, 153,255,153, 255);
     }
     else { filledCircleRGBA(renderer, centerX,centerY, radius-5, 105,105,105, 255); }

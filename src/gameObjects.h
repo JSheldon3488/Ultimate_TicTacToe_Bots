@@ -48,7 +48,6 @@ public:
     UltimateBoard();
     std::vector<Board> boards;
     State winner;
-    bool gameOver;
     State currentPlayer;
 };
 

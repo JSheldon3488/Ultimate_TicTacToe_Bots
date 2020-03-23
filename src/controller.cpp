@@ -16,22 +16,15 @@ Controller::Controller(const size_t tile_width, const size_t tile_height) : tile
 
 std::map<std::string, int> Controller::HandleInput(UltimateBoard &ultimateBoard) {
     SDL_Event e;
-    int ultimate_col;
-    int ultimate_row;
-    int ultimate_board;
-    int board_row;
-    int board_col;
     std::map<std::string, int> click;
-    //Initial values set for testing
-    click["board"] = -1;
-    click["row"] = -1;
-    click["col"] = -1;
 
     // Loop until you receive a valid move
     while (!hasMoved) {
         SDL_PollEvent(&e);
         if (e.type == SDL_QUIT) {
-            ultimateBoard.gameOver = true;
+            click["board"] = -1;
+            click["row"] = -1;
+            click["col"] = -1;
             hasMoved = true;
         }
         else if (e.type == SDL_MOUSEBUTTONDOWN) {
@@ -47,12 +40,12 @@ std::map<std::string, int> Controller::HandleInput(UltimateBoard &ultimateBoard)
 
             //Convert coordinates to a board #, row in that board, and column in that board.
             // Solve for board #
-            ultimate_col = adjusted_x/(3*tile_width);
-            ultimate_row = adjusted_y/(3*tile_height);
-            ultimate_board = (3*ultimate_row + ultimate_col);
+            int ultimate_col = adjusted_x/(3*tile_width);
+            int ultimate_row = adjusted_y/(3*tile_height);
+            int ultimate_board = (3*ultimate_row + ultimate_col);
             // Solve for row and col
-            board_row = (adjusted_y - 3*tile_height*ultimate_row)/tile_height;
-            board_col = (adjusted_x - 3*tile_width*ultimate_col)/tile_width;
+            int board_row = (adjusted_y - 3*tile_height*ultimate_row)/tile_height;
+            int board_col = (adjusted_x - 3*tile_width*ultimate_col)/tile_width;
             
             //Check if a validMove
             if (isValidMove(ultimateBoard, ultimate_board, board_row, board_col)) {

@@ -12,12 +12,6 @@ math.h
 SDL.h
 ../dependencies/SDL.h
 
-/home/workspace/FinalProject/src/controller.cpp
-controller.h
-/home/workspace/FinalProject/src/controller.h
-iostream
--
-
 /home/workspace/FinalProject/src/controller.h
 map
 -
@@ -45,10 +39,6 @@ renderer.h
 /home/workspace/FinalProject/src/renderer.h
 controller.h
 /home/workspace/FinalProject/src/controller.h
-
-/home/workspace/FinalProject/src/gameObjects.cpp
-gameObjects.h
-/home/workspace/FinalProject/src/gameObjects.h
 
 /home/workspace/FinalProject/src/gameObjects.h
 vector
