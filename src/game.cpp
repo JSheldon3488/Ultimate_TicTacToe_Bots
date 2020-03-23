@@ -10,7 +10,7 @@ Game::Game() {
 
 void Game::Run(Renderer &renderer, Controller &controller) {
     // Render Original Board
-    renderer.Render(ultimateBoard);
+    renderer.Render(ultimateBoard, gameOver);
 
     // Game Loop
     while(!gameOver) {
@@ -25,9 +25,11 @@ void Game::Run(Renderer &renderer, Controller &controller) {
             // Update Game State
             update(ultimateBoard, click["board"], click["row"], click["col"]);
             // Render new board
-            renderer.Render(ultimateBoard);
+            renderer.Render(ultimateBoard, gameOver);
         }
     }
+    // Let the player see the end of game state
+    std::this_thread::sleep_for(std::chrono::seconds(5));
 }
 
 void Game::update(UltimateBoard &ultimateBoard, int board, int row, int col) {

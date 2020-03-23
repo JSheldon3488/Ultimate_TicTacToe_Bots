@@ -32,7 +32,7 @@ Renderer::~Renderer() {
     SDL_Quit();
 }
 
-void Renderer::Render(const UltimateBoard &boards) {
+void Renderer::Render(const UltimateBoard &boards, bool gameOver) {
     //Rectangle used for rendering the tiles
     SDL_Rect rect;
 
@@ -78,13 +78,19 @@ void Renderer::Render(const UltimateBoard &boards) {
     }
 
     //Update Window Title
-    UpdateWindowTitle(boards.currentPlayer);
+    UpdateWindowTitle(boards.currentPlayer, gameOver);
 
     //Update Screen
     SDL_RenderPresent(_renderer);
 }
-void Renderer::UpdateWindowTitle(State player) {
-    std::string title = player == State::Player1 ? "Player X Turn" : "Player 0 Turn";
+void Renderer::UpdateWindowTitle(State player, bool gameOver) {
+    std::string title;
+    if (!gameOver) {
+        title = player == State::Player1 ? "Player X Turn" : "Player 0 Turn";
+    }
+    else {
+        title = player == State::Player1 ? "Player O WINS!!!" : "Player X WINS!!!";
+    }
     SDL_SetWindowTitle(_window, title.c_str());
 }
 

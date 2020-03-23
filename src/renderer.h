@@ -11,8 +11,8 @@ class Renderer {
 public:
     Renderer(const std::size_t screen_width, const std::size_t screen_height, const std::size_t tile_width, const std::size_t tile_height);
     ~Renderer();
-    void Render(const UltimateBoard &boards);
-    void UpdateWindowTitle(State player);
+    void Render(const UltimateBoard &boards, bool gameOver);
+    void UpdateWindowTitle(State player, bool gameOver);
 
 private:
     SDL_Window *_window;
