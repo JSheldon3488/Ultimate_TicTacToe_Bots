@@ -11,12 +11,13 @@ Game::Game() {
 void Game::Run(Renderer &renderer, Controller &controller) {
     // Render Original Board
     renderer.Render(ultimateBoard, gameOver);
+    std::map<std::string, int> click;
 
     // Game Loop
     while(!gameOver) {
         // Get User Input
         controller.hasMoved = false;
-        auto click = controller.HandleInput(ultimateBoard);
+        click = controller.HandleInput(ultimateBoard);
         
         if (click["board"] == -1 && click["row"] == -1 && click["col"] == -1){
             gameOver = true;
@@ -28,8 +29,10 @@ void Game::Run(Renderer &renderer, Controller &controller) {
             renderer.Render(ultimateBoard, gameOver);
         }
     }
-    // Let the player see the end of game state
-    std::this_thread::sleep_for(std::chrono::seconds(5));
+    // Let the player see the end of game state if someone won
+    if (click["board"] != -1 && click["row"] != -1 && click["col"] != -1) {
+        std::this_thread::sleep_for(std::chrono::seconds(5));
+    }
 }
 
 void Game::update(UltimateBoard &ultimateBoard, int board, int row, int col) {

@@ -37,7 +37,7 @@ void Renderer::Render(const UltimateBoard &boards, bool gameOver) {
     SDL_Rect rect;
 
     //Clear Screen
-    SDL_SetRenderDrawColor(_renderer, 162,181,205 ,255);
+    SDL_SetRenderDrawColor(_renderer, background_color.r, background_color.g, background_color.b, 255);
     SDL_RenderClear(_renderer);
 
     //Draw Grid
@@ -49,14 +49,14 @@ void Renderer::Render(const UltimateBoard &boards, bool gameOver) {
             rect.h = tile_height;
 
             // Set correct background color for the board
-            if (board.winner == State::Player1) { SDL_SetRenderDrawColor(_renderer, 255,102,102,255);}
-            else if (board.winner == State::Player2) {SDL_SetRenderDrawColor(_renderer, 153,255,153,255);}
-            else if (!board.isActive) {SDL_SetRenderDrawColor(_renderer, 105,105,105,255);}
-            else { SDL_SetRenderDrawColor(_renderer, 255,255,255,255); }
+            if (board.winner == State::Player1) { SDL_SetRenderDrawColor(_renderer, xWin_color.r, xWin_color.g, xWin_color.b, 255);}
+            else if (board.winner == State::Player2) {SDL_SetRenderDrawColor(_renderer, oWin_color.r, oWin_color.g, oWin_color.b, 255);}
+            else if (!board.isActive) {SDL_SetRenderDrawColor(_renderer, inValid_color.r, inValid_color.g, inValid_color.b, 255);}
+            else { SDL_SetRenderDrawColor(_renderer, tile_color.r, tile_color.g, tile_color.b, 255); }
             
             //Draw tile
             SDL_RenderFillRect(_renderer, &rect);
-            SDL_SetRenderDrawColor(_renderer, 0,0,0,255);
+            SDL_SetRenderDrawColor(_renderer, tile_border.r, tile_border.g, tile_border.b, 255);
             SDL_RenderDrawRect(_renderer, &rect);
         }
     }
@@ -104,9 +104,9 @@ void Renderer::drawX(SDL_Renderer *renderer, const int board_row, const int boar
     const float topRightY = row*tile_height + 0.75*tile_height + board_row*20 + 3*board_row*tile_height;
     const float topRightX = col*tile_width + 0.25*tile_width + board_col*20 + 3*board_col*tile_width;
     //Draw left-top to right-bottom diagonal
-    thickLineRGBA(renderer, topLeftX,topLeftY,bottomRightX,bottomRightY, 10, 250,0,0,255);
+    thickLineRGBA(renderer, topLeftX,topLeftY,bottomRightX,bottomRightY, x_color.r, x_color.g, x_color.b ,0,255);
     //Draw left-bottom to right-top diagonal
-    thickLineRGBA(renderer, bottomLeftX,bottomLeftY,topRightX,topRightY, 10, 255,0,0, 255);
+    thickLineRGBA(renderer, bottomLeftX,bottomLeftY,topRightX,topRightY, x_color.r, x_color.g, x_color.b ,0, 255);
 }
 
 void Renderer::drawO(SDL_Renderer *renderer, const int board_row, const int board_col, const bool active, State winner, const int row, const int col) {
@@ -114,16 +114,19 @@ void Renderer::drawO(SDL_Renderer *renderer, const int board_row, const int boar
     const float centerY = 0.5*tile_height + row*tile_height + board_row*20 + 3*board_row*tile_height;
     const float centerX = 0.5*tile_width + col*tile_width + board_col*20 + 3*board_col*tile_width;
     //Draw colorful outter circle
-    filledCircleRGBA(renderer, centerX,centerY, radius+5, 0,255,0, 255);
+    filledCircleRGBA(renderer, centerX,centerY, radius+5, o_color.r, o_color.g, o_color.b, 255);
     //Draw inner circle to make appearance of O
     if (active) { 
-        filledCircleRGBA(renderer, centerX,centerY, radius-5, 255,255,255, 255);
+        filledCircleRGBA(renderer, centerX,centerY, radius-5, tile_color.r, tile_color.g, tile_color.b, 255);
     }
     else if (winner == State::Player1) {
-        filledCircleRGBA(renderer, centerX,centerY, radius-5, 255,102,102, 255);
+        filledCircleRGBA(renderer, centerX,centerY, radius-5, xWin_color.r, xWin_color.g, xWin_color.b, 255);
     }
     else if (winner == State::Player2) {
-        filledCircleRGBA(renderer, centerX,centerY, radius-5, 153,255,153, 255);
+        filledCircleRGBA(renderer, centerX,centerY, radius-5, oWin_color.r, oWin_color.g, oWin_color.b, 255);
     }
-    else { filledCircleRGBA(renderer, centerX,centerY, radius-5, 105,105,105, 255); }
+    else { filledCircleRGBA(renderer, centerX,centerY, radius-5, inValid_color.r, inValid_color.g, inValid_color.b, 255); }
 };
+
+
+Color::Color(int r, int g, int b) : r(r), g(g), b(b) {}
