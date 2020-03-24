@@ -18,7 +18,6 @@
 
 ## Ruberic Highlights
 **Ruberic Requirement:** The project demonstrates an understanding of C++ functions and control structures. 
-
 **Location Addressed:** Game.cpp file Game::Run function lines 11-49.
 
 
