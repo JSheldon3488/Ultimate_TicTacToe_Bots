@@ -1,7 +1,7 @@
 # Ultimate Tic-Tac-Toe Bots Final Project for Udacity C++ Nanodegree
 
 <p align="center">
-    <img src="/ultimate_TTT.gif" width="360" height="360">
+    <img src="/images/ultimate_TTT.gif" width="360" height="360">
 </p>
 
 ## Game Rules
