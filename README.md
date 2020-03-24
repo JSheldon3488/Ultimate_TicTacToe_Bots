@@ -11,7 +11,6 @@
 * When a player makes a move on the local board, the opposing player is "sent" to the corresponding local board on the global board.
   * Example: If "X" moves in the middle cell on an active local board, player "O" will be sent to the middle local board on the global board.
 * If a player is sent to a local board that is already finished then all unfinished baords will become active and playable.
-* Also when a player wins a local board all unfinished boards will become active for the next player.
 * Player turns and end of game status is displayed at the top of the window.
 
 ## Program Code Structure
