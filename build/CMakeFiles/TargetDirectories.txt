@@ -1,3 +1,0 @@
-/home/workspace/FinalProject/build/CMakeFiles/rebuild_cache.dir
-/home/workspace/FinalProject/build/CMakeFiles/Ultimate_TicTacToe.dir
-/home/workspace/FinalProject/build/CMakeFiles/edit_cache.dir
