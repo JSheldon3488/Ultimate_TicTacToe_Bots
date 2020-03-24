@@ -1,8 +1,8 @@
 # Ultimate Tic-Tac-Toe Bots Final Project for Udacity C++ Nanodegree
 
-
-<img src="/3tvjx3.gif" width="400" height="400" align="center">
-
+<p align="center">
+    <img src="/3tvjx3.gif" width="460" height="460">
+</p>
 ## Dependencies for Running Locally
 * cmake >= 3.7
   * All OSes: [click here for installation instructions](https://cmake.org/install/)
