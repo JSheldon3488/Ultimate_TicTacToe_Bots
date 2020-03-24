@@ -8,6 +8,7 @@
 
 enum State {
     Empty,
+    Draw,
     Player1,
     Player2,
 };
@@ -39,6 +40,7 @@ public:
     std::vector<Tile> grid;
     State winner;
     bool isActive;
+    int moveCounter;
     const int row;
     const int col;
 };

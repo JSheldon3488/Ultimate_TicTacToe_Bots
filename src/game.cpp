@@ -10,7 +10,7 @@ Game::Game() {
 
 void Game::Run(Renderer &renderer, Controller &controller) {
     // Render Original Board
-    renderer.Render(ultimateBoard, gameOver);
+    renderer.Render(ultimateBoard, gameOver, ultimateBoard.winner);
     std::map<std::string, int> click;
 
     // Game Loop
@@ -26,7 +26,7 @@ void Game::Run(Renderer &renderer, Controller &controller) {
             // Update Game State
             update(ultimateBoard, click["board"], click["row"], click["col"]);
             // Render new board
-            renderer.Render(ultimateBoard, gameOver);
+            renderer.Render(ultimateBoard, gameOver, ultimateBoard.winner);
         }
     }
     // Let the player see the end of game state if someone won
@@ -36,13 +36,15 @@ void Game::Run(Renderer &renderer, Controller &controller) {
 }
 
 void Game::update(UltimateBoard &ultimateBoard, int board, int row, int col) {
-    // check for winners
+    ultimateBoard.boards[board].moveCounter += 1;
+    // check for winners and draw
     checkforBoardWinner(ultimateBoard.boards[board]);
     checkforUltimateWinner(ultimateBoard);
+
     // Update active boards
     int activeBoard = row*3 + col;
     setActiveBoards(ultimateBoard,activeBoard);
-    // Change Player
+    // Change Player and update Move Counter
     ultimateBoard.currentPlayer = ultimateBoard.currentPlayer == State::Player1 ? State::Player2 : State::Player1;
 }
 
@@ -70,11 +72,17 @@ void Game::checkforBoardWinner(Board &board) {
         board.grid[0].getState() == board.grid[8].getState() &&
         board.grid[0].getState() != State::Empty) {
             board.winner = board.grid[0].getState();
+            return;
     }
     else if (board.grid[6].getState() == board.grid[4].getState() &&
         board.grid[6].getState() == board.grid[2].getState() &&
         board.grid[6].getState() != State::Empty) {
             board.winner = board.grid[6].getState();
+            return;
+    }
+    //Check for Draw
+    if (board.moveCounter == 9) {
+        board.winner = State::Draw;
     }
 }
 
@@ -105,12 +113,26 @@ void Game::checkforUltimateWinner(UltimateBoard &ultimateBoard) {
         ultimateBoard.boards[0].winner != State::Empty) {
             ultimateBoard.winner = ultimateBoard.boards[0].winner;
             gameOver = true;
+            return;
     }
     else if (ultimateBoard.boards[6].winner == ultimateBoard.boards[4].winner &&
         ultimateBoard.boards[6].winner == ultimateBoard.boards[2].winner &&
         ultimateBoard.boards[6].winner != State::Empty) {
             ultimateBoard.winner = ultimateBoard.boards[6].winner;
             gameOver = true;
+            return;
+    }
+    //Check for Draws
+    bool allFinished = true;
+    for (Board board : ultimateBoard.boards) {
+        if (board.winner == State::Empty) {
+            allFinished = false;
+            break;
+        }
+    }
+    if (allFinished) {
+        ultimateBoard.winner == State::Draw;
+        gameOver = true;
     }
 }
 

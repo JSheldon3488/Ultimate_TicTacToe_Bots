@@ -15,9 +15,12 @@ UltimateBoard::UltimateBoard() {
     }
 }
 
+
 Board::Board(int row, int col) : row(row), col(col) {
     winner = State::Empty;
     isActive = true;
+    moveCounter = 0;
+
     //Set up a empty board
     for (int row = 0; row < 3; row++) {
         for (int col = 0; col < 3; col++) {
@@ -25,6 +28,7 @@ Board::Board(int row, int col) : row(row), col(col) {
         }
     }
 }
+
 
 Tile::Tile(const int row, const int col) : row(row), col(col) {
     currentState = State::Empty;
