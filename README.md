@@ -4,6 +4,21 @@
     <img src="/ultimate_TTT.gif" width="360" height="360">
 </p>
 
+## Game Rules
+* Goal: Win 3 local boards to create a Tic-Tac-Toe (3 in a row) on the global board. 
+* Each small 3 × 3 tic-tac-toe board is referred to as a local board, and the larger 3 × 3 board is referred to as the global board.
+* The game randomly selects who goes first.
+* When a player makes a move on the local board, the opposing player is "sent" to the corresponding local board on the global board.
+  * Example: If "X" moves in the middle cell on an active local board, player "O" will be sent to the middle local board on the global board.
+* If a player is sent to a local board that is already finished then all unfinished baords will become active and playable.
+* Also when a player wins a local board all unfinished boards will become active for the next player.
+
+## Program Code Structure
+
+
+## Ruberic Highlights
+
+
 ## Dependencies for Running Locally
 * cmake >= 3.7
   * All OSes: [click here for installation instructions](https://cmake.org/install/)
@@ -19,6 +34,9 @@
   * All installation instructions can be found [here](https://wiki.libsdl.org/Installation)
   * Note that for Linux, an `apt` or `apt-get` installation is preferred to building from source.
   * Helpful Tutorial can be found [here](https://lazyfoo.net/tutorials/SDL/01_hello_SDL/index.php)
+* SDL2_gfx >= 1.0.4
+  * Already set up in dependencies folder
+  * Full Library can be found [here](https://www.ferzkopp.net/wordpress/2016/01/02/sdl_gfx-sdl2_gfx/)
 
 ## Basic Build Instructions
 
