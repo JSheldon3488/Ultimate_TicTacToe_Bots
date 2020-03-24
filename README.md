@@ -5,7 +5,7 @@
 </p>
 
 ## Game Rules
-* Goal: Win 3 local boards to create a Tic-Tac-Toe (3 in a row) on the global board. 
+**Goal:** Win 3 local boards to create a Tic-Tac-Toe (3 in a row) on the global board. 
 * Each small 3 × 3 tic-tac-toe board is referred to as a local board, and the larger 3 × 3 board is referred to as the global board.
 * The game randomly selects who goes first.
 * When a player makes a move on the local board, the opposing player is "sent" to the corresponding local board on the global board.
