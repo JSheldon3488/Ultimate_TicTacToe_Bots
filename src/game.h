@@ -4,6 +4,7 @@
 #include "gameObjects.h"
 #include "renderer.h"
 #include "controller.h"
+#include "bot.h"
 
 
 class Game {
@@ -19,7 +20,8 @@ private:
     void setActiveBoards(UltimateBoard &ultimateBoard, int activeBoard);
 
     bool gameOver;
-    bool bot;
+    bool vsCPU;
+    RandomBot bot;
 };
 
 #endif

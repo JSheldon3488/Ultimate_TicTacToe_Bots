@@ -49,8 +49,6 @@ std::map<std::string, int> Controller::HandleInput(UltimateBoard &ultimateBoard)
             
             //Check if a validMove
             if (isValidMove(ultimateBoard, ultimate_board, board_row, board_col)) {
-                //Update boards
-                ultimateBoard.boards[ultimate_board].grid[(board_row*3 + board_col)].setState(ultimateBoard.currentPlayer);
                 hasMoved = true;
                 // Return where the move happened
                     click["board"] = ultimate_board;

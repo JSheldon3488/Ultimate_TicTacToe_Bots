@@ -4,7 +4,7 @@
 
 Game::Game() {
     gameOver = false;
-    bot = false;
+    vsCPU = true;
 }
 
 
@@ -15,36 +15,52 @@ void Game::Run(Renderer &renderer, Controller &controller) {
 
     // Game Loop
     while(!gameOver) {
-        // Get User Input
-        controller.hasMoved = false;
-        click = controller.HandleInput(ultimateBoard);
-        
-        if (click["board"] == -1 && click["row"] == -1 && click["col"] == -1){
-            gameOver = true;
-        }
-        else {
-            // Update Game State
-            update(ultimateBoard, click["board"], click["row"], click["col"]);
-            // Render new board
+        // CPU turn path
+        if (vsCPU && ultimateBoard.currentPlayer == State::Player2) {
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+            auto botMove = bot.makeMove(ultimateBoard);
+
+            update(ultimateBoard, botMove["board"], botMove["row"], botMove["col"]);
             renderer.Render(ultimateBoard, gameOver, ultimateBoard.winner);
         }
+
+        // User turn path
+        else {
+            // Get User Input
+            controller.hasMoved = false;
+            click = controller.HandleInput(ultimateBoard);
+
+            if (click["board"] == -1 && click["row"] == -1 && click["col"] == -1){
+                gameOver = true;
+            }
+            else {
+                // Update Game State
+                update(ultimateBoard, click["board"], click["row"], click["col"]);
+                // Render new board
+                renderer.Render(ultimateBoard, gameOver, ultimateBoard.winner);
+            }
+        }
     }
-    // Let the player see the end of game state if someone won
+    // Let the player see the end of game state
     if (click["board"] != -1 && click["row"] != -1 && click["col"] != -1) {
         std::this_thread::sleep_for(std::chrono::seconds(5));
     }
 }
 
 void Game::update(UltimateBoard &ultimateBoard, int board, int row, int col) {
+    // Make move
+    ultimateBoard.boards[board].grid[(row*3 + col)].setState(ultimateBoard.currentPlayer);
     ultimateBoard.boards[board].moveCounter += 1;
+    
     // check for winners and draw
     checkforBoardWinner(ultimateBoard.boards[board]);
     checkforUltimateWinner(ultimateBoard);
-
+    
     // Update active boards
     int activeBoard = row*3 + col;
     setActiveBoards(ultimateBoard,activeBoard);
-    // Change Player and update Move Counter
+    
+    // Change Player
     ultimateBoard.currentPlayer = ultimateBoard.currentPlayer == State::Player1 ? State::Player2 : State::Player1;
 }
 

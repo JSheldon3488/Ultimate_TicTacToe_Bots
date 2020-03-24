@@ -94,10 +94,15 @@ CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_rotozoom.c.o: /usr/include/S
 CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_rotozoom.c.o: /usr/include/SDL2/begin_code.h
 CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_rotozoom.c.o: /usr/include/SDL2/close_code.h
 
+CMakeFiles/Ultimate_TicTacToe.dir/src/bot.cpp.o: ../src/bot.cpp
+CMakeFiles/Ultimate_TicTacToe.dir/src/bot.cpp.o: ../src/bot.h
+CMakeFiles/Ultimate_TicTacToe.dir/src/bot.cpp.o: ../src/gameObjects.h
+
 CMakeFiles/Ultimate_TicTacToe.dir/src/controller.cpp.o: ../src/controller.cpp
 CMakeFiles/Ultimate_TicTacToe.dir/src/controller.cpp.o: ../src/controller.h
 CMakeFiles/Ultimate_TicTacToe.dir/src/controller.cpp.o: ../src/gameObjects.h
 
+CMakeFiles/Ultimate_TicTacToe.dir/src/game.cpp.o: ../src/bot.h
 CMakeFiles/Ultimate_TicTacToe.dir/src/game.cpp.o: ../src/controller.h
 CMakeFiles/Ultimate_TicTacToe.dir/src/game.cpp.o: ../src/game.cpp
 CMakeFiles/Ultimate_TicTacToe.dir/src/game.cpp.o: ../src/game.h
@@ -107,6 +112,7 @@ CMakeFiles/Ultimate_TicTacToe.dir/src/game.cpp.o: ../src/renderer.h
 CMakeFiles/Ultimate_TicTacToe.dir/src/gameObjects.cpp.o: ../src/gameObjects.cpp
 CMakeFiles/Ultimate_TicTacToe.dir/src/gameObjects.cpp.o: ../src/gameObjects.h
 
+CMakeFiles/Ultimate_TicTacToe.dir/src/main.cpp.o: ../src/bot.h
 CMakeFiles/Ultimate_TicTacToe.dir/src/main.cpp.o: ../src/controller.h
 CMakeFiles/Ultimate_TicTacToe.dir/src/main.cpp.o: ../src/game.h
 CMakeFiles/Ultimate_TicTacToe.dir/src/main.cpp.o: ../src/gameObjects.h

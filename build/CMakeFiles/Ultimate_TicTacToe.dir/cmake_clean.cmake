@@ -4,6 +4,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/Ultimate_TicTacToe.dir/src/gameObjects.cpp.o"
   "CMakeFiles/Ultimate_TicTacToe.dir/src/game.cpp.o"
   "CMakeFiles/Ultimate_TicTacToe.dir/src/controller.cpp.o"
+  "CMakeFiles/Ultimate_TicTacToe.dir/src/bot.cpp.o"
   "CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_gfxPrimitives.c.o"
   "CMakeFiles/Ultimate_TicTacToe.dir/dependencies/SDL2_rotozoom.c.o"
   "Ultimate_TicTacToe.pdb"
