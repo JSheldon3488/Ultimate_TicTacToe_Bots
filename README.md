@@ -14,7 +14,9 @@
 * Also when a player wins a local board all unfinished boards will become active for the next player.
 
 ## Program Code Structure
-
+<p align="center">
+    <img src="/images/ultimate_TTT.png">
+</p>
 
 ## Ruberic Highlights
 **Ruberic Requirement:** The project demonstrates an understanding of C++ functions and control structures.  
