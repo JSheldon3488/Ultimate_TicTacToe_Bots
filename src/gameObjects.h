@@ -13,6 +13,7 @@ enum State {
     Player2,
 };
 
+
 class Tile {
 public:
     Tile(const int row, const int col);
@@ -26,6 +27,7 @@ private:
     State currentState;
 };
 
+
 /* Borad and UltimateBoard Vector Index Layout
     -------------
     | 0 | 1 | 2 |
@@ -33,7 +35,6 @@ private:
     | 6 | 7 | 8 |
     -------------
 */
-
 class Board {
 public:
     Board(int row, int col);
@@ -44,6 +45,7 @@ public:
     const int row;
     const int col;
 };
+
 
 class UltimateBoard {
 public:

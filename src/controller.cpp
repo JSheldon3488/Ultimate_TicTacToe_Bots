@@ -21,14 +21,18 @@ std::map<std::string, int> Controller::HandleInput(UltimateBoard &ultimateBoard)
     // Loop until you receive a valid move
     while (!hasMoved) {
         SDL_PollEvent(&e);
+        // Handle Clickling "X" in top right
         if (e.type == SDL_QUIT) {
             click["board"] = -1;
             click["row"] = -1;
             click["col"] = -1;
             hasMoved = true;
+            return click;
         }
+
+        // Handle Clicking anywhere in the game
         else if (e.type == SDL_MOUSEBUTTONDOWN) {
-            //Factor in additional spacing for x and y due to the gaps between boards
+            // Factor in additional spacing for x and y due to the gaps between boards
             int adjusted_x = e.button.x;
             int adjusted_y = e.button.y;
             // Adjust x coordinate
@@ -38,7 +42,7 @@ std::map<std::string, int> Controller::HandleInput(UltimateBoard &ultimateBoard)
             if (e.button.y > tile_height*6+40) { adjusted_y -= 40; }
             else if (e.button.y > tile_height*3+20) { adjusted_y -= 20; }
 
-            //Convert coordinates to a board #, row in that board, and column in that board.
+            // Convert coordinates to a board #, row in that board, and column in that board.
             // Solve for board #
             int ultimate_col = adjusted_x/(3*tile_width);
             int ultimate_row = adjusted_y/(3*tile_height);
@@ -47,18 +51,17 @@ std::map<std::string, int> Controller::HandleInput(UltimateBoard &ultimateBoard)
             int board_row = (adjusted_y - 3*tile_height*ultimate_row)/tile_height;
             int board_col = (adjusted_x - 3*tile_width*ultimate_col)/tile_width;
             
-            //Check if a validMove
+            // Check if a validMove
             if (isValidMove(ultimateBoard, ultimate_board, board_row, board_col)) {
                 hasMoved = true;
                 // Return where the move happened
-                    click["board"] = ultimate_board;
-                    click["row"] = board_row;
-                    click["col"] = board_col;
-                    return click;
+                click["board"] = ultimate_board;
+                click["row"] = board_row;
+                click["col"] = board_col;
+                return click;
             }
         }
     }
-    return click;
 }
 
 bool Controller::isValidMove(UltimateBoard &ultimateBoard, const int board, const int row, const int col) {

@@ -17,6 +17,6 @@ int main()
     Renderer renderer(ScreenWdith,ScreenHeight, TileWidth, TileHeight);
     Controller controller(TileWidth, TileHeight);
     Game game;
-    //Run Game
+    
     game.Run(renderer, controller);
 }

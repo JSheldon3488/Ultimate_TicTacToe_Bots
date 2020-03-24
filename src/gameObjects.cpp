@@ -1,5 +1,6 @@
 #include "gameObjects.h"
 
+
 UltimateBoard::UltimateBoard() {
     winner = State::Empty;
 

@@ -1,15 +1,15 @@
 #include "bot.h"
 
 
-
 std::map<std::string,int> RandomBot::makeMove(UltimateBoard &ultimateBoard) {
     std::map<std::string, int> move;
-    // Generate a random mumber between 0 and 8 to pick a board to play on
+    // Randoom Number Generator setup
     std::random_device rd;
     std::mt19937 rng(rd());
     std::uniform_int_distribution<int> brd(0,8);
     std::uniform_int_distribution<int> row_col(0,2);
 
+    // Generate random numbers until its a valid move
     int board = brd(rng);
     int row = row_col(rng);
     int col = row_col(rng);
@@ -18,6 +18,7 @@ std::map<std::string,int> RandomBot::makeMove(UltimateBoard &ultimateBoard) {
         row = row_col(rng);
         col = row_col(rng);
     }
+    
     move["board"] = board;
     move["row"] = row;
     move["col"] = col;

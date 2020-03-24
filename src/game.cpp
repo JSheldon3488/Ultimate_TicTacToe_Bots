@@ -41,6 +41,7 @@ void Game::Run(Renderer &renderer, Controller &controller) {
             }
         }
     }
+
     // Let the player see the end of game state
     if (click["board"] != -1 && click["row"] != -1 && click["col"] != -1) {
         std::this_thread::sleep_for(std::chrono::seconds(5));
@@ -96,14 +97,15 @@ void Game::checkforBoardWinner(Board &board) {
             board.winner = board.grid[6].getState();
             return;
     }
-    //Check for Draw
+
+    // No Winner - Check for Draw
     if (board.moveCounter == 9) {
         board.winner = State::Draw;
     }
 }
 
 void Game::checkforUltimateWinner(UltimateBoard &ultimateBoard) {
-        //Check all three rows
+    //Check all three rows
     for (int r = 0; r < 3; r++) {
         if (ultimateBoard.boards[r*3].winner == ultimateBoard.boards[r*3+1].winner &&
             ultimateBoard.boards[r*3].winner == ultimateBoard.boards[r*3+2].winner &&
@@ -138,7 +140,8 @@ void Game::checkforUltimateWinner(UltimateBoard &ultimateBoard) {
             gameOver = true;
             return;
     }
-    //Check for Draws
+
+    //No Winner - Check for Draws
     bool allFinished = true;
     for (Board board : ultimateBoard.boards) {
         if (board.winner == State::Empty) {

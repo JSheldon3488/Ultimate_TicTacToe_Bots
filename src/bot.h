@@ -6,6 +6,7 @@
 #include <string>
 #include "gameObjects.h"
 
+
 class RandomBot {
 public:
     std::map<std::string, int> makeMove(UltimateBoard &ultimateBoard);
