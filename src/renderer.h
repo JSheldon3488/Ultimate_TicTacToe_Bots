@@ -20,7 +20,7 @@ class Renderer {
 public:
     Renderer(const std::size_t screen_width, const std::size_t screen_height, const std::size_t tile_width, const std::size_t tile_height);
     ~Renderer();
-    void Render(const UltimateBoard &boards, bool gameOver, State winner);
+    void Render(const UltimateBoard &ultimateBoard, bool gameOver, State winner);
     void UpdateWindowTitle(State player, bool gameOver, State winner);
 
 private:

@@ -2,6 +2,10 @@
 #include "SDL2_gfxPrimitives.h"
 #include <iostream>
 
+
+Color::Color(int r, int g, int b) : r(r), g(g), b(b) {}
+
+
 Renderer::Renderer(const std::size_t screen_width,
                    const std::size_t screen_height, 
                    const std::size_t tile_width, 
@@ -32,7 +36,7 @@ Renderer::~Renderer() {
     SDL_Quit();
 }
 
-void Renderer::Render(const UltimateBoard &boards, bool gameOver, State winner) {
+void Renderer::Render(const UltimateBoard &ultimateBoard, bool gameOver, State winner) {
     //Rectangle used for rendering the tiles
     SDL_Rect rect;
 
@@ -41,7 +45,7 @@ void Renderer::Render(const UltimateBoard &boards, bool gameOver, State winner) 
     SDL_RenderClear(_renderer);
 
     //Draw Grid
-    for (Board board : boards.boards) {
+    for (Board board : ultimateBoard.boards) {
         for (Tile tile : board.grid) {
             rect.x = board.col*3*tile_width + tile.col*tile_width + board.col*20;
             rect.y = board.row*3*tile_height + tile.row*tile_height + board.row*20;
@@ -62,7 +66,7 @@ void Renderer::Render(const UltimateBoard &boards, bool gameOver, State winner) 
     }
     
     //Draw X's and O's
-    for (Board board : boards.boards) {
+    for (Board board : ultimateBoard.boards) {
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
                 Tile currentPosition = board.grid[(row*3+col)];
@@ -78,11 +82,13 @@ void Renderer::Render(const UltimateBoard &boards, bool gameOver, State winner) 
     }
 
     //Update Window Title
-    UpdateWindowTitle(boards.currentPlayer, gameOver, winner);
+    UpdateWindowTitle(ultimateBoard.currentPlayer, gameOver, winner);
 
     //Update Screen
     SDL_RenderPresent(_renderer);
 }
+
+
 void Renderer::UpdateWindowTitle(State player, bool gameOver, State winner) {
     std::string title;
     if (!gameOver) {
@@ -97,7 +103,9 @@ void Renderer::UpdateWindowTitle(State player, bool gameOver, State winner) {
     SDL_SetWindowTitle(_window, title.c_str());
 }
 
+
 void Renderer::drawX(SDL_Renderer *renderer, const int board_row, const int board_col, const int row, const int col) {
+    //Calculate all the coordinates needed
     const float topLeftY = row*tile_height + 0.25*tile_height + board_row*20 + 3*board_row*tile_height;
     const float topLeftX = col*tile_width + 0.25*tile_width + board_col*20 + 3*board_col*tile_width;
     const float bottomRightY = row*tile_height + 0.75*tile_height + board_row*20 + 3*board_row*tile_height;
@@ -106,19 +114,24 @@ void Renderer::drawX(SDL_Renderer *renderer, const int board_row, const int boar
     const float bottomLeftX = col*tile_width + 0.75*tile_width + board_col*20 + 3*board_col*tile_width;
     const float topRightY = row*tile_height + 0.75*tile_height + board_row*20 + 3*board_row*tile_height;
     const float topRightX = col*tile_width + 0.25*tile_width + board_col*20 + 3*board_col*tile_width;
+    
     //Draw left-top to right-bottom diagonal
     thickLineRGBA(renderer, topLeftX,topLeftY,bottomRightX,bottomRightY, x_color.r, x_color.g, x_color.b ,0,255);
     //Draw left-bottom to right-top diagonal
     thickLineRGBA(renderer, bottomLeftX,bottomLeftY,topRightX,topRightY, x_color.r, x_color.g, x_color.b ,0, 255);
 }
 
+
 void Renderer::drawO(SDL_Renderer *renderer, const int board_row, const int board_col, const bool active, State winner, const int row, const int col) {
+    //Calculate all the coordinates needed
     const float radius = 0.25*tile_width;
     const float centerY = 0.5*tile_height + row*tile_height + board_row*20 + 3*board_row*tile_height;
     const float centerX = 0.5*tile_width + col*tile_width + board_col*20 + 3*board_col*tile_width;
+    
     //Draw colorful outter circle
     filledCircleRGBA(renderer, centerX,centerY, radius+5, o_color.r, o_color.g, o_color.b, 255);
-    //Draw inner circle to make appearance of O
+    
+    //Draw inner circle to make appearance of O (depends on what the tile background is at this state in game)
     if (active) { 
         filledCircleRGBA(renderer, centerX,centerY, radius-5, tile_color.r, tile_color.g, tile_color.b, 255);
     }
@@ -130,6 +143,3 @@ void Renderer::drawO(SDL_Renderer *renderer, const int board_row, const int boar
     }
     else { filledCircleRGBA(renderer, centerX,centerY, radius-5, inValid_color.r, inValid_color.g, inValid_color.b, 255); }
 };
-
-
-Color::Color(int r, int g, int b) : r(r), g(g), b(b) {}
