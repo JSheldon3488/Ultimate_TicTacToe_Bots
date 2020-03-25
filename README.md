@@ -18,22 +18,6 @@
     <img src="/images/ultimate_TTT.png">
 </p>
 
-## Ruberic Highlights
-**Ruberic Requirement:** The project demonstrates an understanding of C++ functions and control structures.  
-**Location Addressed:** Game.cpp file Game::Run function lines 11-49.  
-
-**Ruberic Requirement:** The project accepts user input and processes the input.  
-**Location Addressed:** Controller.cpp file, Controller::HandleInput function lines 17-65.  
-
-**Ruberic Requirement:** The project uses Object Oriented Programming techniques.  
-**Location Addressed:** Look at Program Code Structure above.  
-
-**Ruberic Requirement:** Class constructors utilize member initialization lists.  
-**Location Addressed:** controller.cpp line 12, gameObjects.cpp line 20 and 34, renderer.cpp line 12 and 13.  
-
-**Ruberic Requirement:** The project makes use of references in function declarations.  
-**Location Addressed:** controller.h line 14 and 20, bot.h line 12 and 15, game.h line 13, 17,18,19,20.  
-
 
 ## Dependencies for Running Locally
 * cmake >= 3.7
