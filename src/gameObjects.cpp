@@ -3,8 +3,6 @@
 
 UltimateBoard::UltimateBoard() {
     winner = State::Empty;
-    winBoard_start = nullptr;
-    winBoard_end = nullptr;
 
     //Set up who goes first
     srand(time(NULL));

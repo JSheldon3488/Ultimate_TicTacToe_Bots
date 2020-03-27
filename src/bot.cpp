@@ -10,15 +10,21 @@ std::map<std::string,int> RandomBot::makeMove(UltimateBoard &ultimateBoard) {
     std::uniform_int_distribution<int> row_col(0,2);
 
     // Generate random numbers until its a valid move
-    int board = brd(rng);
     int row = row_col(rng);
     int col = row_col(rng);
+    int board_row = row_col(rng);
+    int board_col = row_col(rng);
+    int board = board_row*3 + board_col;
     while (!isValidMove(ultimateBoard,board,row,col)) {
-        board = brd(rng);
         row = row_col(rng);
         col = row_col(rng);
+        board_row = row_col(rng);
+        board_col = row_col(rng);
+        board = board_row*3 + board_col;
     }
     
+    move["board_row"] = board_row;
+    move["board_col"] = board_col;
     move["board"] = board;
     move["row"] = row;
     move["col"] = col;

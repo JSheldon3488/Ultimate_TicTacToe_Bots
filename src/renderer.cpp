@@ -75,13 +75,19 @@ void Renderer::Render(const UltimateBoard &ultimateBoard, bool gameOver, State w
                     if (currentPosition.getState() == State::Player1) {
                         drawX(_renderer, board.row, board.col, row,col);
                     }
-                    else {drawO(_renderer, board.row, board.col, board.isActive, board.winner, row,col);}
+                    else {
+                        bool isLast = (ultimateBoard.last_boardRow == board.row &&
+                                        ultimateBoard.last_boardCol == board.col &&
+                                        ultimateBoard.last_row == row &&
+                                        ultimateBoard.last_col == col);
+                        drawO(_renderer, board.row, board.col, board.isActive, board.winner, row,col, isLast);
+                    }
                 }
             }
         }
     }
 
-    drawWinners(_renderer, ultimateBoard);
+    drawBoardWinners(_renderer, ultimateBoard);
     UpdateWindowTitle(ultimateBoard.currentPlayer, gameOver, winner);
     SDL_RenderPresent(_renderer);
 }
@@ -120,11 +126,17 @@ void Renderer::drawX(SDL_Renderer *renderer, const int board_row, const int boar
 }
 
 
-void Renderer::drawO(SDL_Renderer *renderer, const int board_row, const int board_col, const bool active, State winner, const int row, const int col) {
+void Renderer::drawO(SDL_Renderer *renderer, const int board_row, const int board_col, const bool active, State winner, const int row, const int col, bool isLast) {
     //Calculate all the coordinates needed
     const float radius = 0.25*tile_width;
     const float centerY = 0.5*tile_height + row*tile_height + board_row*20 + 3*board_row*tile_height;
     const float centerX = 0.5*tile_width + col*tile_width + board_col*20 + 3*board_col*tile_width;
+
+    //Highlight last CPU play
+    if (isLast) {
+        filledCircleRGBA(renderer, centerX,centerY, radius+12, 255,215,0, 255);
+        filledCircleRGBA(renderer, centerX,centerY, radius+10, o_color.r, o_color.g, o_color.b, 255);
+    }
     
     //Draw colorful outter circle
     filledCircleRGBA(renderer, centerX,centerY, radius+5, o_color.r, o_color.g, o_color.b, 255);
@@ -142,7 +154,7 @@ void Renderer::drawO(SDL_Renderer *renderer, const int board_row, const int boar
     else { filledCircleRGBA(renderer, centerX,centerY, radius-5, inValid_color.r, inValid_color.g, inValid_color.b, 255); }
 }
 
-void Renderer::drawWinners(SDL_Renderer *renderer, const UltimateBoard &ultimateBoard) {
+void Renderer::drawBoardWinners(SDL_Renderer *renderer, const UltimateBoard &ultimateBoard) {
     // For each board if winner is not emptry or draw then draw the winner
     for (Board board : ultimateBoard.boards) {
         if (board.winner == State::Player1 || board.winner == State::Player2) {

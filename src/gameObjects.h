@@ -55,8 +55,10 @@ public:
     std::vector<Board> boards;
     State winner;
     State currentPlayer;
-    Board* winBoard_start;
-    Board* winBoard_end;
+    int last_boardRow;
+    int last_boardCol;
+    int last_row;
+    int last_col;
 };
 
 #endif

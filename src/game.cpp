@@ -19,6 +19,10 @@ void Game::Run(Renderer &renderer, Controller &controller) {
         if (vsCPU && ultimateBoard.currentPlayer == State::Player2) {
             std::this_thread::sleep_for(std::chrono::seconds(1));
             auto botMove = bot.makeMove(ultimateBoard);
+            ultimateBoard.last_boardRow = botMove["board_row"];
+            ultimateBoard.last_boardCol = botMove["board_col"];
+            ultimateBoard.last_row = botMove["row"];
+            ultimateBoard.last_col = botMove["col"];
 
             update(ultimateBoard, botMove["board"], botMove["row"], botMove["col"]);
             renderer.Render(ultimateBoard, gameOver, ultimateBoard.winner);

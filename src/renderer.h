@@ -40,8 +40,8 @@ private:
     Color oWin_color{102,255,102};
 
     void drawX(SDL_Renderer *renderer, const int board_row, const int board_col, const int row, const int col);
-    void drawO(SDL_Renderer *renderer, const int board_row, const int board_col, const bool active, State winner, const int row, const int col);
-    void drawWinners(SDL_Renderer *renderer, const UltimateBoard &ultimateBoard);
+    void drawO(SDL_Renderer *renderer, const int board_row, const int board_col, const bool active, State winner, const int row, const int col, bool isLastCPU);
+    void drawBoardWinners(SDL_Renderer *renderer, const UltimateBoard &ultimateBoard);
 };
 
 #endif
