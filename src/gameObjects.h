@@ -44,6 +44,8 @@ public:
     int moveCounter;
     const int row;
     const int col;
+    Tile* winTile_start;
+    Tile* winTile_end;
 };
 
 
@@ -53,6 +55,8 @@ public:
     std::vector<Board> boards;
     State winner;
     State currentPlayer;
+    Board* winBoard_start;
+    Board* winBoard_end;
 };
 
 #endif

@@ -72,6 +72,8 @@ void Game::checkforBoardWinner(Board &board) {
             board.grid[r*3].getState() == board.grid[r*3+2].getState() &&
             board.grid[r*3].getState() != State::Empty) {
                 board.winner = board.grid[r*3].getState();
+                board.winTile_start = &(board.grid[r*3]);
+                board.winTile_end = &(board.grid[r*3+2]);
                 return;
         }
     }
@@ -81,6 +83,8 @@ void Game::checkforBoardWinner(Board &board) {
             board.grid[r].getState() == board.grid[r+6].getState() &&
             board.grid[r].getState() != State::Empty) {
                 board.winner = board.grid[r].getState();
+                board.winTile_start = &(board.grid[r]);
+                board.winTile_end = &(board.grid[r+6]);
                 return;
         }
     }
@@ -89,12 +93,16 @@ void Game::checkforBoardWinner(Board &board) {
         board.grid[0].getState() == board.grid[8].getState() &&
         board.grid[0].getState() != State::Empty) {
             board.winner = board.grid[0].getState();
+            board.winTile_start = &(board.grid[0]);
+            board.winTile_end = &(board.grid[8]);
             return;
     }
     else if (board.grid[6].getState() == board.grid[4].getState() &&
         board.grid[6].getState() == board.grid[2].getState() &&
         board.grid[6].getState() != State::Empty) {
             board.winner = board.grid[6].getState();
+            board.winTile_start = &(board.grid[6]);
+            board.winTile_end = &(board.grid[2]);
             return;
     }
 

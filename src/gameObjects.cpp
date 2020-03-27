@@ -3,6 +3,8 @@
 
 UltimateBoard::UltimateBoard() {
     winner = State::Empty;
+    winBoard_start = nullptr;
+    winBoard_end = nullptr;
 
     //Set up who goes first
     srand(time(NULL));
@@ -21,6 +23,8 @@ Board::Board(int row, int col) : row(row), col(col) {
     winner = State::Empty;
     isActive = true;
     moveCounter = 0;
+    winTile_start = nullptr;
+    winTile_end = nullptr;
 
     //Set up a empty board
     for (int row = 0; row < 3; row++) {

@@ -81,10 +81,8 @@ void Renderer::Render(const UltimateBoard &ultimateBoard, bool gameOver, State w
         }
     }
 
-    //Update Window Title
+    drawWinners(_renderer, ultimateBoard);
     UpdateWindowTitle(ultimateBoard.currentPlayer, gameOver, winner);
-
-    //Update Screen
     SDL_RenderPresent(_renderer);
 }
 
@@ -116,9 +114,9 @@ void Renderer::drawX(SDL_Renderer *renderer, const int board_row, const int boar
     const float topRightX = col*tile_width + 0.25*tile_width + board_col*20 + 3*board_col*tile_width;
     
     //Draw left-top to right-bottom diagonal
-    thickLineRGBA(renderer, topLeftX,topLeftY,bottomRightX,bottomRightY, x_color.r, x_color.g, x_color.b ,0,255);
+    thickLineRGBA(renderer, topLeftX,topLeftY,bottomRightX,bottomRightY, 10, x_color.r, x_color.g, x_color.b ,255);
     //Draw left-bottom to right-top diagonal
-    thickLineRGBA(renderer, bottomLeftX,bottomLeftY,topRightX,topRightY, x_color.r, x_color.g, x_color.b ,0, 255);
+    thickLineRGBA(renderer, bottomLeftX,bottomLeftY,topRightX,topRightY, 10, x_color.r, x_color.g, x_color.b ,255);
 }
 
 
@@ -142,4 +140,23 @@ void Renderer::drawO(SDL_Renderer *renderer, const int board_row, const int boar
         filledCircleRGBA(renderer, centerX,centerY, radius-5, oWin_color.r, oWin_color.g, oWin_color.b, 255);
     }
     else { filledCircleRGBA(renderer, centerX,centerY, radius-5, inValid_color.r, inValid_color.g, inValid_color.b, 255); }
-};
+}
+
+void Renderer::drawWinners(SDL_Renderer *renderer, const UltimateBoard &ultimateBoard) {
+    // For each board if winner is not emptry or draw then draw the winner
+    for (Board board : ultimateBoard.boards) {
+        if (board.winner == State::Player1 || board.winner == State::Player2) {
+            float start_centerX = 3*board.col*tile_width + board.col*20 + board.winTile_start->col*tile_width + 0.5*tile_width;
+            float start_centerY = 3*board.row*tile_height + board.row*20 + board.winTile_start->row*tile_height + 0.5*tile_height;
+            float end_centerX = 3*board.col*tile_width + board.col*20 + board.winTile_end->col*tile_width + 0.5*tile_width;
+            float end_centerY = 3*board.row*tile_height + board.row*20 + board.winTile_end->row*tile_height + 0.5*tile_height;
+            
+            if (board.winner == State::Player1) {
+                thickLineRGBA(renderer, start_centerX,start_centerY,end_centerX,end_centerY, 10, x_color.r, x_color.g, x_color.b ,255);
+            }
+            else {
+                thickLineRGBA(renderer, start_centerX,start_centerY,end_centerX,end_centerY, 10, o_color.r, o_color.g, o_color.b ,255); 
+            }
+        }   
+    }
+}
