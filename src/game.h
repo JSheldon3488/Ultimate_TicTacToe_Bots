@@ -7,6 +7,7 @@
 #include "bot.h"
 
 
+/* Game class handles the game loop and everything else needed to run the game */
 class Game {
 public:
     Game();
@@ -14,7 +15,7 @@ public:
     UltimateBoard ultimateBoard;
 
 private:
-    void update(UltimateBoard &ultimateBoard, int board, int row, int col);
+    void update(UltimateBoard &ultimateBoard, Move &move);
     void checkforBoardWinner(Board &board);
     void checkforUltimateWinner(UltimateBoard &ultimateBoard);
     void setActiveBoards(UltimateBoard &ultimateBoard, int activeBoard);

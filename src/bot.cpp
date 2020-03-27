@@ -1,8 +1,7 @@
 #include "bot.h"
 
 
-std::map<std::string,int> RandomBot::makeMove(UltimateBoard &ultimateBoard) {
-    std::map<std::string, int> move;
+Move RandomBot::makeMove(UltimateBoard &ultimateBoard) {
     // Randoom Number Generator setup
     std::random_device rd;
     std::mt19937 rng(rd());
@@ -14,26 +13,19 @@ std::map<std::string,int> RandomBot::makeMove(UltimateBoard &ultimateBoard) {
     int col = row_col(rng);
     int board_row = row_col(rng);
     int board_col = row_col(rng);
-    int board = board_row*3 + board_col;
-    while (!isValidMove(ultimateBoard,board,row,col)) {
-        row = row_col(rng);
-        col = row_col(rng);
-        board_row = row_col(rng);
-        board_col = row_col(rng);
-        board = board_row*3 + board_col;
+    Move move(board_row, board_col, row, col);
+    while (!isValidMove(ultimateBoard,move)) {
+        move.board_row = row_col(rng);
+        move.board_col = row_col(rng);
+        move.ultimate_row = row_col(rng);
+        move.ultimate_col = row_col(rng);
     }
-    
-    move["board_row"] = board_row;
-    move["board_col"] = board_col;
-    move["board"] = board;
-    move["row"] = row;
-    move["col"] = col;
     return move;
 }
 
-bool RandomBot::isValidMove(UltimateBoard &ultimateBoard, const int board, const int row, const int col) {
-    if (ultimateBoard.boards[board].isActive) {
-        if (!ultimateBoard.boards[board].grid[(3*row + col)].isOccupied) {
+bool RandomBot::isValidMove(UltimateBoard &ultimateBoard, Move &move) {
+    if (ultimateBoard.boards[move.ultimate_row*3+move.ultimate_col].isActive) {
+        if (!ultimateBoard.boards[move.ultimate_row*3+move.ultimate_col].tiles[(move.board_row*3+move.board_col)].isOccupied) {
             return true;
         }
     }

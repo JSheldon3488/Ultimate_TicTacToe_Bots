@@ -11,20 +11,16 @@ Game::Game() {
 void Game::Run(Renderer &renderer, Controller &controller) {
     // Render Original Board
     renderer.Render(ultimateBoard, gameOver, ultimateBoard.winner);
-    std::map<std::string, int> click;
+    Move move;
 
     // Game Loop
     while(!gameOver) {
         // CPU turn path
         if (vsCPU && ultimateBoard.currentPlayer == State::Player2) {
             std::this_thread::sleep_for(std::chrono::seconds(1));
-            auto botMove = bot.makeMove(ultimateBoard);
-            ultimateBoard.last_boardRow = botMove["board_row"];
-            ultimateBoard.last_boardCol = botMove["board_col"];
-            ultimateBoard.last_row = botMove["row"];
-            ultimateBoard.last_col = botMove["col"];
-
-            update(ultimateBoard, botMove["board"], botMove["row"], botMove["col"]);
+            move = bot.makeMove(ultimateBoard);
+            ultimateBoard.last_CPU_move = move;
+            update(ultimateBoard, move);
             renderer.Render(ultimateBoard, gameOver, ultimateBoard.winner);
         }
 
@@ -32,37 +28,37 @@ void Game::Run(Renderer &renderer, Controller &controller) {
         else {
             // Get User Input
             controller.hasMoved = false;
-            click = controller.HandleInput(ultimateBoard);
+            move = controller.HandleInput(ultimateBoard);
 
-            if (click["board"] == -1 && click["row"] == -1 && click["col"] == -1){
+            if (move.ultimate_row == -1 && move.ultimate_col == -1 && move.board_row == -1 && move.board_col == -1){
                 gameOver = true;
             }
             else {
                 // Update Game State
-                update(ultimateBoard, click["board"], click["row"], click["col"]);
+                update(ultimateBoard, move);
                 // Render new board
                 renderer.Render(ultimateBoard, gameOver, ultimateBoard.winner);
             }
         }
     }
 
-    // Let the player see the end of game state
-    if (click["board"] != -1 && click["row"] != -1 && click["col"] != -1) {
+    // Let the player see the end of game state (replace with Menu)
+    if (move.ultimate_row != -1 && move.ultimate_col != -1 && move.board_row != -1 && move.board_col != -1) {
         std::this_thread::sleep_for(std::chrono::seconds(5));
     }
 }
 
-void Game::update(UltimateBoard &ultimateBoard, int board, int row, int col) {
+void Game::update(UltimateBoard &ultimateBoard, Move &move) {
     // Make move
-    ultimateBoard.boards[board].grid[(row*3 + col)].setState(ultimateBoard.currentPlayer);
-    ultimateBoard.boards[board].moveCounter += 1;
+    ultimateBoard.boards[move.ultimate_row*3 + move.ultimate_col].tiles[(move.board_row*3 + move.board_col)].setState(ultimateBoard.currentPlayer);
+    ultimateBoard.boards[move.ultimate_row*3 + move.ultimate_col].moveCounter += 1;
     
     // check for winners and draw
-    checkforBoardWinner(ultimateBoard.boards[board]);
+    checkforBoardWinner(ultimateBoard.boards[move.ultimate_row*3 + move.ultimate_col]);
     checkforUltimateWinner(ultimateBoard);
     
     // Update active boards
-    int activeBoard = row*3 + col;
+    int activeBoard = move.board_row*3 + move.board_col;
     setActiveBoards(ultimateBoard,activeBoard);
     
     // Change Player
@@ -72,41 +68,41 @@ void Game::update(UltimateBoard &ultimateBoard, int board, int row, int col) {
 void Game::checkforBoardWinner(Board &board) {
     //Check all three rows
     for (int r = 0; r < 3; r++) {
-        if (board.grid[r*3].getState() == board.grid[r*3+1].getState() &&
-            board.grid[r*3].getState() == board.grid[r*3+2].getState() &&
-            board.grid[r*3].getState() != State::Empty) {
-                board.winner = board.grid[r*3].getState();
-                board.winTile_start = &(board.grid[r*3]);
-                board.winTile_end = &(board.grid[r*3+2]);
+        if (board.tiles[r*3].getState() == board.tiles[r*3+1].getState() &&
+            board.tiles[r*3].getState() == board.tiles[r*3+2].getState() &&
+            board.tiles[r*3].getState() != State::Empty) {
+                board.winner = board.tiles[r*3].getState();
+                board.winTile_start = &(board.tiles[r*3]);
+                board.winTile_end = &(board.tiles[r*3+2]);
                 return;
         }
     }
     //Check all three columns
     for (int r = 0; r < 3; r++) {
-        if (board.grid[r].getState() == board.grid[r+3].getState() &&
-            board.grid[r].getState() == board.grid[r+6].getState() &&
-            board.grid[r].getState() != State::Empty) {
-                board.winner = board.grid[r].getState();
-                board.winTile_start = &(board.grid[r]);
-                board.winTile_end = &(board.grid[r+6]);
+        if (board.tiles[r].getState() == board.tiles[r+3].getState() &&
+            board.tiles[r].getState() == board.tiles[r+6].getState() &&
+            board.tiles[r].getState() != State::Empty) {
+                board.winner = board.tiles[r].getState();
+                board.winTile_start = &(board.tiles[r]);
+                board.winTile_end = &(board.tiles[r+6]);
                 return;
         }
     }
     //Check two diagonals
-    if (board.grid[0].getState() == board.grid[4].getState() &&
-        board.grid[0].getState() == board.grid[8].getState() &&
-        board.grid[0].getState() != State::Empty) {
-            board.winner = board.grid[0].getState();
-            board.winTile_start = &(board.grid[0]);
-            board.winTile_end = &(board.grid[8]);
+    if (board.tiles[0].getState() == board.tiles[4].getState() &&
+        board.tiles[0].getState() == board.tiles[8].getState() &&
+        board.tiles[0].getState() != State::Empty) {
+            board.winner = board.tiles[0].getState();
+            board.winTile_start = &(board.tiles[0]);
+            board.winTile_end = &(board.tiles[8]);
             return;
     }
-    else if (board.grid[6].getState() == board.grid[4].getState() &&
-        board.grid[6].getState() == board.grid[2].getState() &&
-        board.grid[6].getState() != State::Empty) {
-            board.winner = board.grid[6].getState();
-            board.winTile_start = &(board.grid[6]);
-            board.winTile_end = &(board.grid[2]);
+    else if (board.tiles[6].getState() == board.tiles[4].getState() &&
+        board.tiles[6].getState() == board.tiles[2].getState() &&
+        board.tiles[6].getState() != State::Empty) {
+            board.winner = board.tiles[6].getState();
+            board.winTile_start = &(board.tiles[6]);
+            board.winTile_end = &(board.tiles[2]);
             return;
     }
 

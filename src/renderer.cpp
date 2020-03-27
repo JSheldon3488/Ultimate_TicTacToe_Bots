@@ -46,7 +46,7 @@ void Renderer::Render(const UltimateBoard &ultimateBoard, bool gameOver, State w
 
     //Draw Grid
     for (Board board : ultimateBoard.boards) {
-        for (Tile tile : board.grid) {
+        for (Tile tile : board.tiles) {
             rect.x = board.col*3*tile_width + tile.col*tile_width + board.col*20;
             rect.y = board.row*3*tile_height + tile.row*tile_height + board.row*20;
             rect.w = tile_width;
@@ -67,22 +67,13 @@ void Renderer::Render(const UltimateBoard &ultimateBoard, bool gameOver, State w
     
     //Draw X's and O's
     for (Board board : ultimateBoard.boards) {
-        for (int row = 0; row < 3; row++) {
-            for (int col = 0; col < 3; col++) {
-                Tile currentPosition = board.grid[(row*3+col)];
-                if (currentPosition.isOccupied) {
-                    //Draw X for Player1 or O for player2
-                    if (currentPosition.getState() == State::Player1) {
-                        drawX(_renderer, board.row, board.col, row,col);
-                    }
-                    else {
-                        bool isLast = (ultimateBoard.last_boardRow == board.row &&
-                                        ultimateBoard.last_boardCol == board.col &&
-                                        ultimateBoard.last_row == row &&
-                                        ultimateBoard.last_col == col);
-                        drawO(_renderer, board.row, board.col, board.isActive, board.winner, row,col, isLast);
-                    }
+        for (Tile tile : board.tiles) {
+            if (tile.isOccupied) {
+                //Draw X for Player1 or O for player2
+                if (tile.getState() == State::Player1) {
+                    drawX(_renderer, board, tile);
                 }
+                else { drawO(_renderer, board, tile, ultimateBoard.last_CPU_move); }
             }
         }
     }
@@ -108,16 +99,16 @@ void Renderer::UpdateWindowTitle(State player, bool gameOver, State winner) {
 }
 
 
-void Renderer::drawX(SDL_Renderer *renderer, const int board_row, const int board_col, const int row, const int col) {
+void Renderer::drawX(SDL_Renderer *renderer, Board &board, Tile &tile) {
     //Calculate all the coordinates needed
-    const float topLeftY = row*tile_height + 0.25*tile_height + board_row*20 + 3*board_row*tile_height;
-    const float topLeftX = col*tile_width + 0.25*tile_width + board_col*20 + 3*board_col*tile_width;
-    const float bottomRightY = row*tile_height + 0.75*tile_height + board_row*20 + 3*board_row*tile_height;
-    const float bottomRightX = col*tile_width + 0.75*tile_width + board_col*20 + 3*board_col*tile_width;
-    const float bottomLeftY = row*tile_height + 0.25*tile_height + board_row*20 + 3*board_row*tile_height;
-    const float bottomLeftX = col*tile_width + 0.75*tile_width + board_col*20 + 3*board_col*tile_width;
-    const float topRightY = row*tile_height + 0.75*tile_height + board_row*20 + 3*board_row*tile_height;
-    const float topRightX = col*tile_width + 0.25*tile_width + board_col*20 + 3*board_col*tile_width;
+    const float topLeftY = tile.row*tile_height + 0.25*tile_height + board.row*20 + 3*board.row*tile_height;
+    const float topLeftX = tile.col*tile_width + 0.25*tile_width + board.col*20 + 3*board.col*tile_width;
+    const float bottomRightY = tile.row*tile_height + 0.75*tile_height + board.row*20 + 3*board.row*tile_height;
+    const float bottomRightX = tile.col*tile_width + 0.75*tile_width + board.col*20 + 3*board.col*tile_width;
+    const float bottomLeftY = tile.row*tile_height + 0.25*tile_height + board.row*20 + 3*board.row*tile_height;
+    const float bottomLeftX = tile.col*tile_width + 0.75*tile_width + board.col*20 + 3*board.col*tile_width;
+    const float topRightY = tile.row*tile_height + 0.75*tile_height + board.row*20 + 3*board.row*tile_height;
+    const float topRightX = tile.col*tile_width + 0.25*tile_width + board.col*20 + 3*board.col*tile_width;
     
     //Draw left-top to right-bottom diagonal
     thickLineRGBA(renderer, topLeftX,topLeftY,bottomRightX,bottomRightY, 10, x_color.r, x_color.g, x_color.b ,255);
@@ -126,14 +117,14 @@ void Renderer::drawX(SDL_Renderer *renderer, const int board_row, const int boar
 }
 
 
-void Renderer::drawO(SDL_Renderer *renderer, const int board_row, const int board_col, const bool active, State winner, const int row, const int col, bool isLast) {
+void Renderer::drawO(SDL_Renderer *renderer, Board &board, Tile &tile, Move lastMove) {
     //Calculate all the coordinates needed
     const float radius = 0.25*tile_width;
-    const float centerY = 0.5*tile_height + row*tile_height + board_row*20 + 3*board_row*tile_height;
-    const float centerX = 0.5*tile_width + col*tile_width + board_col*20 + 3*board_col*tile_width;
+    const float centerY = 0.5*tile_height + tile.row*tile_height + board.row*20 + 3*board.row*tile_height;
+    const float centerX = 0.5*tile_width + tile.col*tile_width + board.col*20 + 3*board.col*tile_width;
 
     //Highlight last CPU play
-    if (isLast) {
+    if (lastMove == Move(board.row, board.col, tile.row, tile.col)) {
         filledCircleRGBA(renderer, centerX,centerY, radius+12, 255,215,0, 255);
         filledCircleRGBA(renderer, centerX,centerY, radius+10, o_color.r, o_color.g, o_color.b, 255);
     }
@@ -142,13 +133,13 @@ void Renderer::drawO(SDL_Renderer *renderer, const int board_row, const int boar
     filledCircleRGBA(renderer, centerX,centerY, radius+5, o_color.r, o_color.g, o_color.b, 255);
     
     //Draw inner circle to make appearance of O (depends on what the tile background is at this state in game)
-    if (active) { 
+    if (board.isActive) { 
         filledCircleRGBA(renderer, centerX,centerY, radius-5, tile_color.r, tile_color.g, tile_color.b, 255);
     }
-    else if (winner == State::Player1) {
+    else if (board.winner == State::Player1) {
         filledCircleRGBA(renderer, centerX,centerY, radius-5, xWin_color.r, xWin_color.g, xWin_color.b, 255);
     }
-    else if (winner == State::Player2) {
+    else if (board.winner == State::Player2) {
         filledCircleRGBA(renderer, centerX,centerY, radius-5, oWin_color.r, oWin_color.g, oWin_color.b, 255);
     }
     else { filledCircleRGBA(renderer, centerX,centerY, radius-5, inValid_color.r, inValid_color.g, inValid_color.b, 255); }

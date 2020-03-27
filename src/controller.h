@@ -1,23 +1,21 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-#include <map>
-#include <string>
 #include <SDL2/SDL.h>
 #include "gameObjects.h"
-#include <map>
 
 
+/* Controller class is used for getting, processing, and returning correct user input */
 class Controller {
 public:
     Controller(const size_t tile_width, const size_t tile_height);
-    std::map<std::string, int> HandleInput(UltimateBoard &ultimateBoard);
+    Move HandleInput(UltimateBoard &ultimateBoard);
     bool hasMoved;
 
 private:
     const size_t tile_width;
     const size_t tile_height;
-    bool isValidMove(UltimateBoard &ultimateBoard, const int board, const int row, const int col);
+    bool isValidMove(UltimateBoard &ultimateBoard, Move &move);
 };
 
 #endif

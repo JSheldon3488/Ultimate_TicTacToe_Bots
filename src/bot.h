@@ -2,17 +2,16 @@
 #define BOT_H
 
 #include <random>
-#include <map>
-#include <string>
 #include "gameObjects.h"
 
 
+/* RandomBot just makes valid moves at random every time it is his turn */
 class RandomBot {
 public:
-    std::map<std::string, int> makeMove(UltimateBoard &ultimateBoard);
+    Move makeMove(UltimateBoard &ultimateBoard);
     
 private:
-    bool isValidMove(UltimateBoard &ultimateBoard, const int board, const int row, const int col);
+    bool isValidMove(UltimateBoard &ultimateBoard, Move &move);
 };
 
 #endif
