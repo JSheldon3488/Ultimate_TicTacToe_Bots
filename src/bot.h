@@ -5,8 +5,14 @@
 #include "gameObjects.h"
 
 
+/* Abstract Class for all future Bots */
+class Bot {
+public:
+    virtual Move makeMove(UltimateBoard &ultimateBoard) = 0;
+};
+
 /* RandomBot just makes valid moves at random every time it is his turn */
-class RandomBot {
+class RandomBot : public Bot {
 public:
     Move makeMove(UltimateBoard &ultimateBoard);
     
