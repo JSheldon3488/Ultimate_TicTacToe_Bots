@@ -16,8 +16,6 @@ public:
 
 private:
     void update(UltimateBoard &ultimateBoard, Move &move);
-    void checkforBoardWinner(Board &board);
-    void checkforUltimateWinner(UltimateBoard &ultimateBoard);
     void setActiveBoards(UltimateBoard &ultimateBoard, int activeBoard);
 
     bool gameOver;

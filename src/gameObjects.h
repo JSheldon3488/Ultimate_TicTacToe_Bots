@@ -63,6 +63,8 @@ public:
     // Tile pointers are used to know where to Render the Win line
     Tile* winTile_start;
     Tile* winTile_end;
+    bool checkforWinner();
+
 };
 
 /* UltimateBoard is the container for all the individual boards. There is only one per game. */
@@ -73,6 +75,7 @@ public:
     State winner;
     State currentPlayer;
     Move last_CPU_move;
+    bool checkforWinner();
 };
 
 #endif

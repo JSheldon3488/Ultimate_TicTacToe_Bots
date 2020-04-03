@@ -54,8 +54,8 @@ void Game::update(UltimateBoard &ultimateBoard, Move &move) {
     ultimateBoard.boards[move.ultimate_row*3 + move.ultimate_col].moveCounter += 1;
     
     // check for winners and draw
-    checkforBoardWinner(ultimateBoard.boards[move.ultimate_row*3 + move.ultimate_col]);
-    checkforUltimateWinner(ultimateBoard);
+    ultimateBoard.boards[move.ultimate_row*3 + move.ultimate_col].checkforWinner();
+    gameOver = ultimateBoard.checkforWinner();
     
     // Update active boards
     int activeBoard = move.board_row*3 + move.board_col;
@@ -63,104 +63,6 @@ void Game::update(UltimateBoard &ultimateBoard, Move &move) {
     
     // Change Player
     ultimateBoard.currentPlayer = ultimateBoard.currentPlayer == State::Player1 ? State::Player2 : State::Player1;
-}
-
-void Game::checkforBoardWinner(Board &board) {
-    //Check all three rows
-    for (int r = 0; r < 3; r++) {
-        if (board.tiles[r*3].getState() == board.tiles[r*3+1].getState() &&
-            board.tiles[r*3].getState() == board.tiles[r*3+2].getState() &&
-            board.tiles[r*3].getState() != State::Empty) {
-                board.winner = board.tiles[r*3].getState();
-                board.winTile_start = &(board.tiles[r*3]);
-                board.winTile_end = &(board.tiles[r*3+2]);
-                return;
-        }
-    }
-    //Check all three columns
-    for (int r = 0; r < 3; r++) {
-        if (board.tiles[r].getState() == board.tiles[r+3].getState() &&
-            board.tiles[r].getState() == board.tiles[r+6].getState() &&
-            board.tiles[r].getState() != State::Empty) {
-                board.winner = board.tiles[r].getState();
-                board.winTile_start = &(board.tiles[r]);
-                board.winTile_end = &(board.tiles[r+6]);
-                return;
-        }
-    }
-    //Check two diagonals
-    if (board.tiles[0].getState() == board.tiles[4].getState() &&
-        board.tiles[0].getState() == board.tiles[8].getState() &&
-        board.tiles[0].getState() != State::Empty) {
-            board.winner = board.tiles[0].getState();
-            board.winTile_start = &(board.tiles[0]);
-            board.winTile_end = &(board.tiles[8]);
-            return;
-    }
-    else if (board.tiles[6].getState() == board.tiles[4].getState() &&
-        board.tiles[6].getState() == board.tiles[2].getState() &&
-        board.tiles[6].getState() != State::Empty) {
-            board.winner = board.tiles[6].getState();
-            board.winTile_start = &(board.tiles[6]);
-            board.winTile_end = &(board.tiles[2]);
-            return;
-    }
-
-    // No Winner - Check for Draw
-    if (board.moveCounter == 9) {
-        board.winner = State::Draw;
-    }
-}
-
-void Game::checkforUltimateWinner(UltimateBoard &ultimateBoard) {
-    //Check all three rows
-    for (int r = 0; r < 3; r++) {
-        if (ultimateBoard.boards[r*3].winner == ultimateBoard.boards[r*3+1].winner &&
-            ultimateBoard.boards[r*3].winner == ultimateBoard.boards[r*3+2].winner &&
-            ultimateBoard.boards[r*3].winner != State::Empty) {
-                ultimateBoard.winner = ultimateBoard.boards[r*3].winner;
-                gameOver = true;
-                return;
-        }
-    }
-    //Check all three columns
-    for (int r = 0; r < 3; r++) {
-        if (ultimateBoard.boards[r].winner == ultimateBoard.boards[r+3].winner &&
-            ultimateBoard.boards[r].winner == ultimateBoard.boards[r+6].winner &&
-            ultimateBoard.boards[r].winner != State::Empty) {
-                ultimateBoard.winner = ultimateBoard.boards[r].winner;
-                gameOver = true;
-                return;
-        }
-    }
-    //Check two diagonals
-    if (ultimateBoard.boards[0].winner == ultimateBoard.boards[4].winner &&
-        ultimateBoard.boards[0].winner == ultimateBoard.boards[8].winner &&
-        ultimateBoard.boards[0].winner != State::Empty) {
-            ultimateBoard.winner = ultimateBoard.boards[0].winner;
-            gameOver = true;
-            return;
-    }
-    else if (ultimateBoard.boards[6].winner == ultimateBoard.boards[4].winner &&
-        ultimateBoard.boards[6].winner == ultimateBoard.boards[2].winner &&
-        ultimateBoard.boards[6].winner != State::Empty) {
-            ultimateBoard.winner = ultimateBoard.boards[6].winner;
-            gameOver = true;
-            return;
-    }
-
-    //No Winner - Check for Draws
-    bool allFinished = true;
-    for (Board board : ultimateBoard.boards) {
-        if (board.winner == State::Empty) {
-            allFinished = false;
-            break;
-        }
-    }
-    if (allFinished) {
-        ultimateBoard.winner == State::Draw;
-        gameOver = true;
-    }
 }
 
 void Game::setActiveBoards(UltimateBoard &ultimateBoard, int activeBoard) {
