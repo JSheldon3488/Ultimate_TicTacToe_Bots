@@ -31,7 +31,7 @@ public:
 class Tile {
 public:
     Tile(const int row, const int col);
-    bool setState(State state);
+    void setState(State state);
     State getState();
     bool isOccupied;
     const int row;
@@ -74,7 +74,7 @@ public:
     State winner;
     State currentPlayer;
     Move last_CPU_move;
-    bool checkforWinner();
+    State checkforWinner();
 };
 
 #endif

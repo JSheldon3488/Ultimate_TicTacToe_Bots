@@ -17,14 +17,13 @@ UltimateBoard::UltimateBoard() {
     }
 }
 
-bool UltimateBoard::checkforWinner() {
+State UltimateBoard::checkforWinner() {
     //Check all three rows
     for (int r = 0; r < 3; r++) {
         if (boards[r*3].winner == boards[r*3+1].winner &&
             boards[r*3].winner == boards[r*3+2].winner &&
             boards[r*3].winner != State::Empty) {
-                winner = boards[r*3].winner;
-                return true;
+                return boards[r*3].winner;
         }
     }
     //Check all three columns
@@ -32,22 +31,19 @@ bool UltimateBoard::checkforWinner() {
         if (boards[r].winner == boards[r+3].winner &&
             boards[r].winner == boards[r+6].winner &&
             boards[r].winner != State::Empty) {
-                winner = boards[r].winner;
-                return true;
+                return boards[r].winner;
         }
     }
     //Check two diagonals
     if (boards[0].winner == boards[4].winner &&
         boards[0].winner == boards[8].winner &&
         boards[0].winner != State::Empty) {
-            winner = boards[0].winner;
-            return true;
+            return boards[0].winner;
     }
     else if (boards[6].winner == boards[4].winner &&
             boards[6].winner == boards[2].winner &&
             boards[6].winner != State::Empty) {
-                winner = boards[6].winner;
-                return true;
+                return boards[6].winner;
     }
 
     //No Winner - Check for Draws
@@ -59,10 +55,9 @@ bool UltimateBoard::checkforWinner() {
         }
     }
     if (allFinished) {
-        winner = State::Draw;
-        return true;
+        return State::Draw;
     }
-    return false;
+    return State::Empty;
 }
 
 
@@ -139,18 +134,15 @@ Tile::Tile(const int row, const int col) : row(row), col(col) {
     isOccupied = false;
 }
 
-bool Tile::setState(State state) {
-    if (currentState == Empty) {
-        currentState = state;
-        isOccupied = true;
-        return true;
-    }
-    else if (state == Empty) {
+void Tile::setState(State state) {
+    if (state == Empty) {
         currentState = state;
         isOccupied = false;
-        return true;
     }
-    return false;
+    else {
+        currentState = state;
+        isOccupied = true;
+    }
 }
 
 State Tile::getState() { return currentState; }

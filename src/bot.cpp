@@ -1,25 +1,28 @@
 #include "bot.h"
 #include <iostream>
+#include <thread>
+
+/***            Utility stuff for all bots to use           ***/
+int Bot::_randomNumber(int max) {
+    std::random_device rd;
+    std::mt19937 rng(rd());
+    std::uniform_int_distribution<int> uniform_dist(0,max);
+    return uniform_dist(rng);
+}
 
 /***            RandomBot Implementations           ***/
 Move RandomBot::makeMove(UltimateBoard &ultimateBoard) {
-    // Randoom Number Generator setup
-    std::random_device rd;
-    std::mt19937 rng(rd());
-    std::uniform_int_distribution<int> brd(0,8);
-    std::uniform_int_distribution<int> row_col(0,2);
-
     // Generate random numbers until its a valid move
-    int row = row_col(rng);
-    int col = row_col(rng);
-    int board_row = row_col(rng);
-    int board_col = row_col(rng);
+    int row = _randomNumber(2);
+    int col = _randomNumber(2);
+    int board_row = _randomNumber(2);
+    int board_col = _randomNumber(2);
     Move move(board_row, board_col, row, col);
     while (!isValidMove(ultimateBoard,move)) {
-        move.board_row = row_col(rng);
-        move.board_col = row_col(rng);
-        move.ultimate_row = row_col(rng);
-        move.ultimate_col = row_col(rng);
+        move.board_row = _randomNumber(2);
+        move.board_col = _randomNumber(2);
+        move.ultimate_row = _randomNumber(2);
+        move.ultimate_col = _randomNumber(2);
     }
     return move;
 }
@@ -44,6 +47,20 @@ Move SingleBoard_MiniMax::makeMove(UltimateBoard &ultimateBoard) {
     move.ultimate_row = board.row;
     move.ultimate_col = board.col;
 
+    //If the board is empty dont waste the time on miniMax because all scores will be 0
+    bool isEmpty = true;
+    for (Tile tile : board.tiles) {
+        if (tile.isOccupied) {
+            isEmpty = false;
+            break;
+        }
+    }
+    if (isEmpty) {
+        move.board_row = _randomNumber(2);
+        move.board_col = _randomNumber(2);
+        return move;
+    }
+
     //Solve miniMax algorithm to select the best tile to play on (make sure board is a copy and original not changed)
     Location_Score tile = getBestTile(board, State::Player2, 10);
     move.board_row = tile.row;
@@ -52,13 +69,18 @@ Move SingleBoard_MiniMax::makeMove(UltimateBoard &ultimateBoard) {
     return move;
 }
 
-/* Returns the first active board it comes across */
+/* Returns a random active board */
 Board SingleBoard_MiniMax::getActiveBoard(UltimateBoard &ultimateBoard) {
+    // Find index of all possible active boards
+    std::vector<int> active;
     for (Board board : ultimateBoard.boards) {
         if (board.isActive) {
-            return board;
+            active.push_back(board.row*3+board.col);
         }
     }
+    // Randomly get a active board.
+    int rand = _randomNumber(active.size()-1);
+    return ultimateBoard.boards[active[rand]];
 }
 
 /* Recursively solves minimax for a given board to get the best move */
@@ -79,7 +101,6 @@ Location_Score SingleBoard_MiniMax::getBestTile(Board &board, State player, int 
             return Location_Score(0);
         }
     }
-    // This logic is wrong because draw will never happen!!! so idk what its doing. Its declaring draw and returning as winner!
 
     //Recursive Case: Solve all games down to base case and then pick best move for given player
     std::vector<Location_Score> scores;
@@ -101,33 +122,40 @@ Location_Score SingleBoard_MiniMax::getBestTile(Board &board, State player, int 
             }
         }
     }
+
     // For this level in the recursion pick the best move based on players perpective (min or max)
-    Location_Score bestMove;
-    // Bot considering best move wants the max value
+    return randomSelectBestScore(scores, player);
+}
+
+Location_Score SingleBoard_MiniMax::randomSelectBestScore(std::vector<Location_Score> &scores, State player) {
+    // Find the best scores
+    int bestScore;
+    // Bot picking the best move wnats the max value
     if (player == State::Player2) {
-        int bestScore = -1000;
+        bestScore = -1000;
         for (auto location_score : scores) {
             if (location_score.score > bestScore) {
-                bestMove = location_score;
                 bestScore = location_score.score;
             }
         }
     }
     // Human picking best move wants the min value
     else {
-        int bestScore = 1000;
+        bestScore = 1000;
         for (auto location_score : scores) {
             if (location_score.score < bestScore) {
-                bestMove = location_score;
                 bestScore = location_score.score;
             }
         }
     }
-    /*
+
+    // Put all the scores that match the best score into a vector and then select one at random
+    std::vector<Location_Score> temp;
     for (auto score : scores) {
-        std::cout << "(" << score.row << ", " << score.col << ", " << score.score << ")" << std::endl;
+        if (score.score == bestScore) {
+            temp.push_back(score);
+        }
     }
-    std::cout << std::endl;
-    */
-    return bestMove;
+    int rand = _randomNumber(temp.size()-1);
+    return temp[rand];
 }

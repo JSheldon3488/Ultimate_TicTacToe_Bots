@@ -57,7 +57,11 @@ void Game::update(UltimateBoard &ultimateBoard, Move &move) {
     if (board_winner != State::Empty) {
         ultimateBoard.boards[move.ultimate_row*3 + move.ultimate_col].winner = board_winner;
     }
-    gameOver = ultimateBoard.checkforWinner();
+    State ultimate_winner = ultimateBoard.checkforWinner();
+    if (ultimate_winner != State::Empty) {
+        ultimateBoard.winner = ultimate_winner;
+        gameOver = true;
+    }
     
     // Update active boards
     int activeBoard = move.board_row*3 + move.board_col;

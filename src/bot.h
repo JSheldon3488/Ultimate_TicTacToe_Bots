@@ -19,6 +19,7 @@ public:
 class Bot {
 public:
     virtual Move makeMove(UltimateBoard &ultimateBoard) = 0;
+    int _randomNumber(int max);
 };
 
 /* RandomBot just makes valid moves at random every time it is his turn */
@@ -34,8 +35,9 @@ private:
 
 /* SingleBoard_miniMax bot will not look at other boards in the ultimate board. It only consideres a single
 active board and solves the minimax algorithm for that board as if that was the only board it
-has to worry about. If there is more then one active board it will choose the first active board
-it comes across and solve the minimax algorithm for that board.*/
+has to worry about. If there is more then one active board it will choose a board at random and solve
+the minimax algorithm for that board. If multiple moves tie for best score on a single board then it will 
+choose the next move at random from the ties.*/
 
 /* SingleBoard_miniMax Bot that will perform minimax algorithm on a single board to choose a move. */
 class SingleBoard_MiniMax : public Bot {
@@ -44,6 +46,7 @@ public:
 private:
     Board getActiveBoard(UltimateBoard &ultimateBoard);
     Location_Score getBestTile(Board &board, State player, int depth);
+    Location_Score randomSelectBestScore(std::vector<Location_Score> &scores, State player);
 };
 
 #endif

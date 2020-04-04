@@ -21,6 +21,7 @@ private:
     bool gameOver;
     bool vsCPU;
     SingleBoard_MiniMax bot;
+    //RandomBot bot;
 };
 
 #endif
