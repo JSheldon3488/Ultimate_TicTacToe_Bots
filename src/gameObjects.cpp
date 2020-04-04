@@ -59,7 +59,7 @@ bool UltimateBoard::checkforWinner() {
         }
     }
     if (allFinished) {
-        winner == State::Draw;
+        winner = State::Draw;
         return true;
     }
     return false;
@@ -70,7 +70,6 @@ bool UltimateBoard::checkforWinner() {
 Board::Board(int row, int col) : row(row), col(col) {
     winner = State::Empty;
     isActive = true;
-    moveCounter = 0;
     winTile_start = nullptr;
     winTile_end = nullptr;
 
@@ -82,16 +81,15 @@ Board::Board(int row, int col) : row(row), col(col) {
     }
 }
 
-bool Board::checkforWinner() {
+State Board::checkforWinner() {
     //Check all three rows
     for (int r = 0; r < 3; r++) {
         if (tiles[r*3].getState() == tiles[r*3+1].getState() &&
             tiles[r*3].getState() == tiles[r*3+2].getState() &&
             tiles[r*3].getState() != State::Empty) {
-                winner = tiles[r*3].getState();
                 winTile_start = &(tiles[r*3]);
                 winTile_end =  &(tiles[r*3+2]);
-                return true;
+                return tiles[r*3].getState();
         }
     }
     //Check all three columns
@@ -99,28 +97,25 @@ bool Board::checkforWinner() {
         if (tiles[r].getState() == tiles[r+3].getState() &&
             tiles[r].getState() == tiles[r+6].getState() &&
             tiles[r].getState() != State::Empty) {
-                winner = tiles[r].getState();
                 winTile_start = &(tiles[r]);
                 winTile_end =  &(tiles[r+6]);
-                return true;
+                return tiles[r].getState();
         }
     }
     //Check two diagonals
     if (tiles[0].getState() == tiles[4].getState() &&
         tiles[0].getState() == tiles[8].getState() &&
         tiles[0].getState() != State::Empty) {
-            winner = tiles[0].getState();
             winTile_start = &(tiles[0]);
             winTile_end =  &(tiles[8]);
-            return true;
+            return tiles[0].getState();
     }
     else if (tiles[6].getState() == tiles[4].getState() &&
             tiles[6].getState() == tiles[2].getState() &&
             tiles[6].getState() != State::Empty) {
-                winner = tiles[6].getState();
                 winTile_start = &(tiles[6]);
                 winTile_end =  &(tiles[2]);
-                return true;
+                return tiles[6].getState();
     }
 
     //No Winner - Check for Draws
@@ -132,10 +127,9 @@ bool Board::checkforWinner() {
         }
     }
     if (allFinished) {
-        winner == State::Draw;
-        return true;
+        return State::Draw;
     }
-    return false;
+    return State::Empty;
 }
 
 
@@ -146,9 +140,14 @@ Tile::Tile(const int row, const int col) : row(row), col(col) {
 }
 
 bool Tile::setState(State state) {
-    if (!isOccupied) {
+    if (currentState == Empty) {
         currentState = state;
         isOccupied = true;
+        return true;
+    }
+    else if (state == Empty) {
+        currentState = state;
+        isOccupied = false;
         return true;
     }
     return false;

@@ -51,10 +51,12 @@ void Game::Run(Renderer &renderer, Controller &controller) {
 void Game::update(UltimateBoard &ultimateBoard, Move &move) {
     // Make move
     ultimateBoard.boards[move.ultimate_row*3 + move.ultimate_col].tiles[(move.board_row*3 + move.board_col)].setState(ultimateBoard.currentPlayer);
-    ultimateBoard.boards[move.ultimate_row*3 + move.ultimate_col].moveCounter += 1;
     
     // check for winners and draw
-    ultimateBoard.boards[move.ultimate_row*3 + move.ultimate_col].checkforWinner();
+    State board_winner = ultimateBoard.boards[move.ultimate_row*3 + move.ultimate_col].checkforWinner();
+    if (board_winner != State::Empty) {
+        ultimateBoard.boards[move.ultimate_row*3 + move.ultimate_col].winner = board_winner;
+    }
     gameOver = ultimateBoard.checkforWinner();
     
     // Update active boards

@@ -59,11 +59,10 @@ public:
     std::vector<Tile> tiles;
     State winner;
     bool isActive;
-    int moveCounter; //Used for Checking Draw
     // Tile pointers are used to know where to Render the Win line
     Tile* winTile_start;
     Tile* winTile_end;
-    bool checkforWinner();
+    State checkforWinner();
 
 };
 
