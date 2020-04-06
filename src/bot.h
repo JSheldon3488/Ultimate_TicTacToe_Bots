@@ -44,7 +44,6 @@ class SingleBoard_MiniMax : public Bot {
 public:
     Move makeMove(UltimateBoard &ultimateBoard);
 private:
-    Board getActiveBoard(UltimateBoard &ultimateBoard);
     Location_Score getBestTile(Board &board, State player, int depth);
     Location_Score randomSelectBestScore(std::vector<Location_Score> &scores, State player);
 };

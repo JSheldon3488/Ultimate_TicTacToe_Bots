@@ -42,11 +42,44 @@ Move SingleBoard_MiniMax::makeMove(UltimateBoard &ultimateBoard) {
     //move to be returned
     Move move;
 
-    //Get an active baord from the ultimateBoard
-    Board board = getActiveBoard(ultimateBoard);
-    move.ultimate_row = board.row;
-    move.ultimate_col = board.col;
+    // Find index of all possible active boards (more efficient to push in index then a board)
+    std::vector<int> active;
+    for (Board board : ultimateBoard.boards) {
+        if (board.isActive) {
+            active.push_back(board.row*3+board.col);
+        }
+    }
 
+    // If more then one active board run the getBestTile on all boards and pick the best move
+    if (active.size() > 1) {
+        int maxScore = -10000;
+        int maxScore_index = 0;
+        for (int i : active) {
+            Location_Score location_score = getBestTile(ultimateBoard.boards[i], Player2, 10);
+            if (location_score.score > maxScore) {
+                maxScore = location_score.score;
+                maxScore_index = i;
+                move.board_row = location_score.row;
+                move.board_col = location_score.col;
+            }
+        }
+        std::cout << std::endl;
+        move.ultimate_row = ultimateBoard.boards[maxScore_index].row;
+        move.ultimate_col = ultimateBoard.boards[maxScore_index].col;
+        return move;
+    }
+
+    // Else solve miniMax algorithm on the only active board
+    Location_Score tile = getBestTile(ultimateBoard.boards[active[0]], State::Player2, 10);
+    move.ultimate_row = ultimateBoard.boards[active[0]].row;
+    move.ultimate_col = ultimateBoard.boards[active[0]].col;
+    move.board_row = tile.row;
+    move.board_col = tile.col;
+    return move;
+}
+
+/* Recursively solves minimax for a given board to get the best move */
+Location_Score SingleBoard_MiniMax::getBestTile(Board &board, State player, int depth) {
     //If the board is empty dont waste the time on miniMax because all scores will be 0
     bool isEmpty = true;
     for (Tile tile : board.tiles) {
@@ -56,35 +89,12 @@ Move SingleBoard_MiniMax::makeMove(UltimateBoard &ultimateBoard) {
         }
     }
     if (isEmpty) {
-        move.board_row = _randomNumber(2);
-        move.board_col = _randomNumber(2);
-        return move;
+        Location_Score tile{0};
+        tile.row = _randomNumber(2);
+        tile.col = _randomNumber(2);
+        return tile;
     }
 
-    //Solve miniMax algorithm to select the best tile to play on (make sure board is a copy and original not changed)
-    Location_Score tile = getBestTile(board, State::Player2, 10);
-    move.board_row = tile.row;
-    move.board_col = tile.col;
-
-    return move;
-}
-
-/* Returns a random active board */
-Board SingleBoard_MiniMax::getActiveBoard(UltimateBoard &ultimateBoard) {
-    // Find index of all possible active boards
-    std::vector<int> active;
-    for (Board board : ultimateBoard.boards) {
-        if (board.isActive) {
-            active.push_back(board.row*3+board.col);
-        }
-    }
-    // Randomly get a active board.
-    int rand = _randomNumber(active.size()-1);
-    return ultimateBoard.boards[active[rand]];
-}
-
-/* Recursively solves minimax for a given board to get the best move */
-Location_Score SingleBoard_MiniMax::getBestTile(Board &board, State player, int depth) {
     //Base Case: Check board for winner and return proper value depending on who won
     State winner = board.checkforWinner();
     if (winner != State::Empty) {

@@ -44,7 +44,7 @@ void Game::Run(Renderer &renderer, Controller &controller) {
 
     // Let the player see the end of game state (replace with Menu)
     if (move.ultimate_row != -1 && move.ultimate_col != -1 && move.board_row != -1 && move.board_col != -1) {
-        std::this_thread::sleep_for(std::chrono::seconds(5));
+        std::this_thread::sleep_for(std::chrono::seconds(10));
     }
 }
 
