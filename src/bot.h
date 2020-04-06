@@ -13,6 +13,8 @@ public:
     int row;
     int col;
     int score;
+    int ultimate_row;
+    int ultimate_col;
 };
 
 /* Abstract Class for all future Bots */

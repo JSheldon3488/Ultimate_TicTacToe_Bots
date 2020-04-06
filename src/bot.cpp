@@ -50,22 +50,40 @@ Move SingleBoard_MiniMax::makeMove(UltimateBoard &ultimateBoard) {
         }
     }
 
-    // If more then one active board run the getBestTile on all boards and pick the best move
+    // If more then one active board run the getBestTile on all boards and pick the best move (break ties randomly)
     if (active.size() > 1) {
+        std::vector<Location_Score> location_scores;
+        //Find the max score
         int maxScore = -10000;
-        int maxScore_index = 0;
         for (int i : active) {
             Location_Score location_score = getBestTile(ultimateBoard.boards[i], Player2, 10);
+            location_score.ultimate_row = ultimateBoard.boards[i].row;
+            location_score.ultimate_col = ultimateBoard.boards[i].col;
+            location_scores.push_back(location_score);
             if (location_score.score > maxScore) {
                 maxScore = location_score.score;
-                maxScore_index = i;
-                move.board_row = location_score.row;
-                move.board_col = location_score.col;
             }
         }
+
+        //Get all boards with the maxScore and select one by breaking ties randomly
+        std::vector<Location_Score> temp;
+        for (auto l_score : location_scores) {
+            if (l_score.score == maxScore) {
+                temp.push_back(l_score);
+            }
+        }
+
+        // Check that he is selecting random
+        for (auto t : temp) {
+            std::cout << "Board: " << t.ultimate_row << "," << t.ultimate_col << " Score: " << t.score << std::endl;
+        }
         std::cout << std::endl;
-        move.ultimate_row = ultimateBoard.boards[maxScore_index].row;
-        move.ultimate_col = ultimateBoard.boards[maxScore_index].col;
+
+        Location_Score randomBestMove = temp[_randomNumber(temp.size()-1)];
+        move.ultimate_row = randomBestMove.ultimate_row;
+        move.ultimate_col = randomBestMove.ultimate_col;
+        move.board_row = randomBestMove.row;
+        move.board_col = randomBestMove.col;
         return move;
     }
 
